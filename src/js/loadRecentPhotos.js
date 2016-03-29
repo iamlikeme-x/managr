@@ -1,13 +1,7 @@
 // Version 2.0
 
 //Function to be called
-function loadRecentPhotos(){
-    //If loadRecentPhotos() called with no param (happens on first time call)
-    if(sessionStorage.getItem('filtered')){
-        $('#content').html(sessionStorage.getItem('originalContent'));
-        return;
-    }
-    
+function loadRecentPhotos(pageNum){
     var method = 'flickr.interestingness.getList';
     var apiKey = 'f558724ba49174dc32d3828d1a7302cd';
     var format = 'json';
@@ -21,8 +15,8 @@ function loadRecentPhotos(){
             method: method,
             api_key: apiKey,
             format: format,
-            page: 1,
-            per_page: 42
+            page: pageNum,
+            per_page: 50
         },
         dataType: 'jsonp',
         async: false
@@ -49,6 +43,10 @@ function jsonFlickrApi(data){
         var url = 'https://farm'+farm+'.staticflickr.com/'+server+'/'+id+'_'+secret+'.jpg';
         
         imgUrls[title] = url;
+        /*if((i+1)%3==0) {
+            splitList.push(imgUrls);
+            imgUrls = {};
+        }*/
     }
     
     var executionTime = (new Date().getTime() - window.timestamp)/1000;
