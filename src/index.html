@@ -56,7 +56,14 @@
         <script src="./js/authenticate.js"></script> <!-- Handles all of the authentication functions -->
         
         <script>
+        //Create classifier
+        window.classifier = new ColorClassifier();
+        get_dataset('js/dataset.js', function(data){
+            window.classifier.learn(data);
+        });
         $(function(){
+            
+            
             //Load photos
             loadRecentPhotos();
             
@@ -110,48 +117,24 @@
 //            }
             
             function filter(colors){
-                
-                window.classifier = new ColorClassifier();
-                get_dataset('js/dataset.js', function(data){
-                    window.classifier.learn(data);
-                });
-                
-                $('.colorTaggedImage').each(function(){
-                    var colorThief = new ColorThief();
-                    palette = colorThief.getPalette(this, 4);
-                    console.log(palette);
-                    var colors = [];
-                    
-                    $.each(palette, function(i){
-                        var colorName = window.classifier.classify(palette[i][0], palette[i][1], palette[i][2]);
-                        if(colors.indexOf(colorName) == -1){
-                            colors.push(colorName);
-                        }
-                        
-                        $(this).attr('data-colors', colors.join(','));
-                    });
-                });
-                
-                return;
-                
-                var cachedContent = sessionStorage.getItem('cachedContent');
+                var cachedContent = $(sessionStorage.getItem('cachedContent'));
                 
                 if(cachedContent){
-                    $(cachedContent).children().each(function(){
-                        console.log($(this).find('img'));
-                        var colorList = $(this).find('img').data('colors');
-                        
-                        console.log(colorList);
-                        
+                    cachedContent = classify(cachedContent);
+                    $(cachedContent).find('img').each(function(){
+                        var colorList = $(this).data('colors');                        
                         if(colorList){
                             colorList = colorList.split(',');
                             if(!checkAtts(colors, colorList)){
+                                console.log("Filtered");
+                                console.log($(this).parent());
                                 $(this).parent().remove();
                             }
                         }else{
                             console.warn('No colors found for #'+$(this).attr('id'));
                         }
                     });
+                    $('#content').html(cachedContent);
                     
                     $('#popular').justifiedGallery({
                         'rowHeight': 200,
