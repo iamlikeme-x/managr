@@ -68,50 +68,100 @@
                 $('#filtermenu').toggle();
                 var arr = $(this).data('colors');
                 arr = arr.split(',');
-                console.log('Colour Picked');
                 filter(arr);
             });
             
-            /*$(window).scroll(function(){
-                if(((window.innerHeight + window.scrollY) >= document.body.offsetHeight)){
-                    console.log('At Bottom!');
-                    loadNextPage(2);
-                    //$('#popular').justifiedGallery('norewind');
-                }
-            });*/
-            
+//            function filter(colors){
+//                console.log('Filter Function passed: ', colors);
+//                //If cached content is found, reset before filtering otherwise it will filter down to nothing recursively
+//                /*if(sessionStorage.getItem('cachedContent')){
+//                    $('#content').html(sessionStorage.getItem('originalContent'));
+//                }else{ //No cached content found
+//                    loadRecentPhotos();
+//                }*/
+//                
+//                console.log($('.colorTaggedImage'));
+//                
+//                //Iterate through images
+//                $('.colorTaggedImage').each(function(i, el){
+//                    console.log(i, el);
+//                    var colorList = $(this).data('colors'); //Get colors from element
+//                    
+//                    console.log(colorList);
+//                    
+//                    //Check colors were found
+//                    if(colorList){
+//                        console.log(colorList);
+//                        colorList = colorList.split(','); //split colors into array
+//                        if(!checkAtts(colors,colorList)){ //check if element colors match given colors to filter against
+//                            $(this).parent().remove(); //If no match, remove element
+//                        }
+//                    }else{ //If no colours found, put a warning in console
+//                        console.warn('No colors found for #'+$(this).attr('id'));
+//                    }
+//                });
+//                
+//                //Redraw justified gallery
+//                $('#popular').justifiedGallery({
+//                    'rowHeight': 200,
+//                    'lastRow': 'justify',
+//                    'margins': 6
+//                });
+//            }
             
             function filter(colors){
-                console.log('Colours Picked: ', colors);
-                if(!sessionStorage.getItem('loaded')){
-                    console.log('Not previously loaded, setting filtered to true and saving content');
-                    sessionStorage.setItem('filtered', true);
-                    sessionStorage.setItem('originalContent', $('#content').html());
-                }else{
-                    console.log('previously loaded');
-                    if(sessionStorage.getItem('originalContent')){
-                        console.log('Saved content found - Setting Content to saved content');
-                        $('#content').html(sessionStorage.getItem('originalContent'));
-                    }else{
-                        console.log('No Content found, loading recent photos');
-                        loadRecentPhotos();
-                    }
-                }
+                
+                window.classifier = new ColorClassifier();
+                get_dataset('js/dataset.js', function(data){
+                    window.classifier.learn(data);
+                });
+                
                 $('.colorTaggedImage').each(function(){
-                    var colorList = $(this).data('colors');
-                    console.log(colorList);
-                    if(colorList){
-                        colorList = colorList.split(',');
-                        if(!checkAtts(colors,colorList)){
-                            $(this).parent().remove();
+                    var colorThief = new ColorThief();
+                    palette = colorThief.getPalette(this, 4);
+                    console.log(palette);
+                    var colors = [];
+                    
+                    $.each(palette, function(i){
+                        var colorName = window.classifier.classify(palette[i][0], palette[i][1], palette[i][2]);
+                        if(colors.indexOf(colorName) == -1){
+                            colors.push(colorName);
                         }
-                    }
+                        
+                        $(this).attr('data-colors', colors.join(','));
+                    });
                 });
-                $('#popular').justifiedGallery({
-                    'rowHeight': 200,
-                    'lastRow': 'justify',
-                    'margins': 6
-                });
+                
+                return;
+                
+                var cachedContent = sessionStorage.getItem('cachedContent');
+                
+                if(cachedContent){
+                    $(cachedContent).children().each(function(){
+                        console.log($(this).find('img'));
+                        var colorList = $(this).find('img').data('colors');
+                        
+                        console.log(colorList);
+                        
+                        if(colorList){
+                            colorList = colorList.split(',');
+                            if(!checkAtts(colors, colorList)){
+                                $(this).parent().remove();
+                            }
+                        }else{
+                            console.warn('No colors found for #'+$(this).attr('id'));
+                        }
+                    });
+                    
+                    $('#popular').justifiedGallery({
+                        'rowHeight': 200,
+                        'lastRow': 'justify',
+                        'margins': 6
+                    });
+                }else{
+                    loadRecentPhotos();
+                    filter(colors);
+                }
             }
             
             //Check if user is logged in, and decide what button to show: login or upload
