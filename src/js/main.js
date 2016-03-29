@@ -39,16 +39,11 @@ function loadImgs(arr) {
         window.classifier.learn(data);
     });
     var arrLength = Object.size(arr);
+    console.log(typeof arr);
     var counter = 1;
-<<<<<<< HEAD
-    $.each(arr, function(key, value){
-        var img = $('<img src="'+value+'" id="img'+counter+'" class="colorTaggedImage">');
-        var a = $('<a id="img-container'+counter+'" href="#" data-title="'+key+'"></a>');
-=======
     $.each(arr, function (key, value) {
         var img = $('<img src="' + value + '" id="img' + counter + '">');
         var a = $('<a id="img-container' + counter + '" href="#" data-title="' + key + '"></a>');
->>>>>>> refs/remotes/origin/master
         a.append(img);
         $('#popular').append(a);
         img.on('load', function () {
@@ -74,33 +69,11 @@ function loadImgs(arr) {
                     'margins': 6
                 })
             }
-            
-            if(!sessionStorage.getItem('loaded')){
-                sessionStorage.setItem('loaded', true);
-                sessionStorage.setItem('originalContent', $('#content').html());
-            }
         });
 
         counter++;
     });
 }
-<<<<<<< HEAD
-
-//Load more images on scroll, not working atm
-/*$(window).scroll(function() {
-    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-        if (!window.pN){
-            window.pN = 1;
-        }
-        window.pN += 1;
-        loadRecentPhotos(window.pN)
-        $('#popular').justifiedGallery('norewind');
-    }
-});*/
-
-
-function checkAtts(a, obj){
-=======
 //$(window).scroll(function() {
 //    if($(window).scrollTop() + $(window).height() == $(document).height()) {
 //        if (!window.pN){
@@ -112,84 +85,8 @@ function checkAtts(a, obj){
 //    }
 //});
 
-function createOauth(opts) {
-    if (!opts) {
-        var opts = {
-            service: "request_token",
-            token: false,
-            method: "GET"
-        }
-    }
-    if(!opts.config){
-        config = getConfig();
-    } else {
-        config = opts.config;
-        console.log("cfg ",config);
-    }
-    var oauth = new OAuth({
-        consumer: {
-            public: 'f558724ba49174dc32d3828d1a7302cd',
-            secret: 'a1e01a255a63aabc'
-        },
-        signature_method: 'HMAC-SHA1'
-    });
-
-    if (!opts.service) {
-        opts.service = "request_token";
-    }
-    var request_data = {
-        url: 'https://www.flickr.com/services/oauth/' + opts.service,
-        method: opts.method,
-    };
-
-    if (opts.extra && opts.extra.length >= 1) {
-        var d = {}
-        for (i in opts.extra) {
-            d[opts.extra[i]] = config[opts.extra[i]];
-        }
-        console.log("d ",d);
-        request_data["data"] = d;
-    }
-
-    if (opts.token) {
-        var token = {
-            public: config.oauth_token,
-            secret: config.oauth_token_secret
-        };
-        var data = oauth.authorize(request_data, token);
-    } else {
-        var data = oauth.authorize(request_data);
-    }
-    console.log(data);
-    return $.ajax({
-        url: request_data.url,
-        type: request_data.method,
-        data: data,
-        async: false,
-        error: function(error) {
-            console.log(error);
-        }
-    }).responseText;
-}
-
-
-function finishAuthentication(cfg) {
-    config = getConfig();
-    config["oauth_verifier"] = cfg.oauth_verifier;
-    var opts = {
-        token: true,
-        method: "GET",
-        service: "access_token",
-        config: config,
-        extra: ["oauth_verifier"]
-    }
-    var data = createOauth(opts);
-    var data = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
-    saveData(data);
-}
 
 function checkAtts(a, obj) {
->>>>>>> refs/remotes/origin/master
     // a: attributes to check.
     // obj: object to check against.
     if (!obj) {
