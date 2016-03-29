@@ -33,58 +33,46 @@ document.onkeydown = function (pressed) {
     //END Node Webkit Stuff              //
     ///////////////////////////////////////
 
-function loadImgs(arr) {
+function loadImgs(arr){
     window.classifier = new ColorClassifier();
-    get_dataset('js/dataset.js', function (data) {
+    get_dataset('js/dataset.js', function(data){
         window.classifier.learn(data);
     });
     var arrLength = Object.size(arr);
-    console.log(typeof arr);
-    var counter = 1;
-    $.each(arr, function (key, value) {
-        var img = $('<img src="' + value + '" id="img' + counter + '">');
-        var a = $('<a id="img-container' + counter + '" href="#" data-title="' + key + '"></a>');
+    counter = 1;
+    $.each(arr, function(key, value){
+        var img = $('<img src="'+value+'" id="img'+counter+'" class="colorTaggedImage">');
+        var a = $('<a id="img-container'+counter+'" href="#" title="'+key.replace(/"/g, '&quot;')+'"></a>');
         a.append(img);
         $('#popular').append(a);
-        img.on('load', function () {
-            var colorThief = new ColorThief();
-            palette = colorThief.getPalette(img[0], 4);
-            var color = [];
-
-            $.each(palette, function (i) {
-                var colorName = window.classifier.classify(palette[i][0], palette[i][1], palette[i][2]);
-                if (color.indexOf(colorName) == -1) {
-                    color.push(colorName);
-                }
+        img.on('load', function(){
+//            console.log(img);
+//            var colorThief = new ColorThief();
+//            palette = colorThief.getPalette(img[0], 4);
+//            var color = [];
+//
+//            //Iterate through each color in palette
+//            $.each(palette, function(i){
+//                var colorName = window.classifier.classify(palette[i][0], palette[i][1], palette[i][2]); //Convert color in palette from RGB to english color name
+//                if(color.indexOf(colorName) == -1){
+//                    color.push(colorName);
+//                }
+//            });
+//            
+//            //Append determined colors to element as data-colors attribute
+//            $(this).attr('data-colors', color.join());
+            
+            $("#popular").justifiedGallery({
+                'rowHeight': 200,
+                'lastRow': 'justify',
+                'margins': 6
             });
-            $(this).attr('data-colors', color.join());
-            var filterColors = JSON.parse(sessionStorage.getItem('filterColors'));
-            if (filterColors.length == 0 || checkAtts(filterColors, img.data('colors').split(','))) {
-                $('#popular').append(a);
-            }
-            if (counter + 1 >= arrLength) {
-                $("#popular").justifiedGallery({
-                    'rowHeight': 200,
-                    'lastRow': 'justify',
-                    'margins': 6
-                })
-            }
         });
-
         counter++;
     });
+    
+    sessionStorage.setItem('cachedContent', $('#popular').html());
 }
-//$(window).scroll(function() {
-//    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-//        if (!window.pN){
-//            window.pN = 1;
-//        }
-//        window.pN += 1;
-//        loadRecentPhotos(window.pN)
-//        $('#popular').justifiedGallery('norewind');
-//    }
-//});
-
 
 function checkAtts(a, obj) {
     // a: attributes to check.

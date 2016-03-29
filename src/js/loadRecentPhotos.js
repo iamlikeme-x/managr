@@ -2,6 +2,19 @@
 
 //Function to be called
 function loadRecentPhotos(pageNum){
+    
+    if(sessionStorage.getItem('cachedContent')){
+        $('#content').html(sessionStorage.getItem('cachedContent'));
+        
+        $("#popular").justifiedGallery({
+            'rowHeight': 200,
+            'lastRow': 'justify',
+            'margins': 6
+        });
+        
+        return;
+    }
+    
     var method = 'flickr.interestingness.getList';
     var apiKey = 'f558724ba49174dc32d3828d1a7302cd';
     var format = 'json';
