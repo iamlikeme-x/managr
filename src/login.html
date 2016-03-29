@@ -3,6 +3,10 @@
 
 <head>
     <title>Login via Flickr</title>
+    <link rel="stylesheet" href="css/login-style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!-- JS FILES -->
+    
     <script src="./js/jquery-2.2.0.min.js"></script>
     <script src="./js/oauth.min.js"></script>
     <!-- OAuth.js & Dependencies-->
@@ -14,9 +18,12 @@
 </head>
 
 <body>
-    
-
-
+    <img src="img/logo.png" alt="managr" id="logo">
+    <div id="message">
+        <h1>Sucessfully Authenticated!</h1>
+        <p>We're waiting for Flickr to send us their login
+            <br>Whilst you wait, what is root(1764)?</p>
+    </div>
     <script>
         $(function() {
             var data = createOauth();
