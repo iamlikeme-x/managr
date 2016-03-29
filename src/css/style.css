@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  background: #FCFEFF;
+  font-family: 'Open Sans', sans-serif; }
+
+.wrapper {
+  text-align: center;
+  width: 100%; }
+  .wrapper#header {
+    background: -webkit-linear-gradient(left, #28546C, #587D91);
+    line-height: 16.66%;
+    text-align: center;
+    width: 100%;
+    height: 100px; }
+    .wrapper#header header {
+      width: 100%;
+      max-width: 1024px;
+      margin: auto;
+      position: relative;
+      display: block;
+      height: 100%; }
+      .wrapper#header header img {
+        cursor: pointer; }
+        .wrapper#header header img#logo {
+          position: absolute;
+          left: 4%;
+          top: 50%;
+          transform: translateY(-50%); }
+        .wrapper#header header img#upload, .wrapper#header header img#login {
+          position: absolute;
+          right: 4%;
+          top: 50%;
+          transform: translateY(-50%); }
+        .wrapper#header header img#filter {
+          position: absolute;
+          right: 10%;
+          top: 50%;
+          transform: translateY(-50%); }
+          .wrapper#header header img#filter:focus {
+            outline: none; }
+          .wrapper#header header img#filter:focus ~ #filtermenu {
+            display: block; }
+      .wrapper#header header #filtermenu {
+        display: none;
+        position: absolute;
+        top: 80%;
+        right: 2.5%;
+        background: #FCFEFF;
+        height: 225px;
+        width: 275px;
+        z-index: 1000;
+        text-align: left;
+        border-radius: 5px;
+        box-shadow: 0 0 24px -2px #787878; }
+        .wrapper#header header #filtermenu:before {
+          content: '';
+          border-bottom: 12px solid #FCFEFF;
+          border-left: 15px solid transparent;
+          border-right: 15px solid transparent;
+          position: absolute;
+          top: -12px;
+          left: 68.5%;
+          transform: translateX(-50%); }
+        .wrapper#header header #filtermenu h2 {
+          margin: 12px;
+          margin-top: 21px;
+          font-weight: 400; }
+        .wrapper#header header #filtermenu .colours {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center; }
+          .wrapper#header header #filtermenu .colours .colour {
+            cursor: pointer;
+            box-shadow: 0 5px 20px -2px #787878;
+            width: 60px;
+            height: 60px;
+            margin: 10px;
+            border-radius: 100%; }
+            .wrapper#header header #filtermenu .colours .colour#red {
+              background: #FF505F; }
+            .wrapper#header header #filtermenu .colours .colour#blue {
+              background: #4B8AFF; }
+            .wrapper#header header #filtermenu .colours .colour#green {
+              background: #16C430; }
+            .wrapper#header header #filtermenu .colours .colour#yellow {
+              background: #FCDB3E; }
+            .wrapper#header header #filtermenu .colours .colour#white {
+              background: #FCFEFF; }
+            .wrapper#header header #filtermenu .colours .colour#black {
+              background: #383838; }
+  .wrapper#content #popular {
+    width: 100%;
+    max-width: 1024px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap; }
+    .wrapper#content #popular a:hover:after {
+      content: attr("data-title"); }
+  .wrapper#upload-content {
+    text-align: center; }
+    .wrapper#upload-content #uploadbutton {
+      position: relative;
+      margin: auto;
+      background: url("../img/upload-img.png");
+      background-repeat: no-repeat;
+      background-position: 50% 25%;
+      width: 100%;
+      height: 629px; }
+      .wrapper#upload-content #uploadbutton #img {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 5;
+        cursor: pointer; }
+        .wrapper#upload-content #uploadbutton #img:focus {
+          outline: none; }
+      .wrapper#upload-content #uploadbutton h1 {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        z-index: 4; }
+      .wrapper#upload-content #uploadbutton #filetransfer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 70%;
+        z-index: 4;
+        width: 40vw;
+        margin: auto;
+        text-align: center; }
+        .wrapper#upload-content #uploadbutton #filetransfer #progressbar {
+          margin: auto;
+          width: 100%;
+          height: 3vh;
+          background: #6E90A2; }
+          .wrapper#upload-content #uploadbutton #filetransfer #progressbar #done {
+            height: 100%;
+            width: 0%;
+            background: #28546C;
+            z-index: 3; }
+          .wrapper#upload-content #uploadbutton #filetransfer #progressbar:before {
+            content: attr(data-task);
+            color: #FCFEFF;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 1%;
+            bottom: 0;
+            z-index: 4; }
+          .wrapper#upload-content #uploadbutton #filetransfer #progressbar:after {
+            content: attr(data-percent);
+            color: #FCFEFF;
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 1%;
+            bottom: 0;
+            z-index: 4; }
+
+/*# sourceMappingURL=style.css.map */

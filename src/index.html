@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Flickr</title>
+        
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/justifiedGallery.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <!-- Scripts that need to be called before the rest of the document loads -->
+        <script src="./js/jquery-2.2.0.min.js"></script><!-- jQuery -->
+        <!-- OAuth.js & Dependencies-->
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+        <script src="./js/oauth.min.js"></script>
+        
+        <script src="./js/config.js"></script> <!-- loads our config -->
+    </head>
+    <body>
+        <script>
+            //Get our config and store it as a global variable so that it can be accessed from any file. We don't need to worry about polluting the global namespace as we're in our own entire environment (browser)
+            window.config = getConfig(); //getConfig defined in loadConfig.js
+        </script>
+        <div class="wrapper" id="header">
+            <header>
+                <a href="index.html" id="logocntnr"><img src="img/logo.png" alt="Logo" id="logo"></a>
+                <img src="img/icon-filter.png" alt="Filter" id="filter">
+                <div id="filtermenu">
+                    <h2>Filter</h2>
+                    <div class="colours">
+                        <div class="colour" id="red" data-colors="redviolet,red,redorange,yelloworange"></div>
+                        <div class="colour" id="blue"data-colors="bluegreen,blue,blueviolet,violet"></div>
+                        <div class="colour" id="green" data-colors="yellowgreen,green,bluegreen"></div>
+                        <div class="colour" id="yellow" data-colors="yelloworange,orange,redorange"></div>
+                        <div class="colour" id="black" data-colors="black,grey"></div>
+                        <div class="colour" id="white" data-colors="white"></div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        
+        <div class="wrapper" id="content"><div id="popular"></div></div>
+        
+        <!-- Exeternal Scripts -->
+        <script src="./js/color-thief.js"></script><!-- -->
+        <script src="./js/color-classifier.js"></script><!-- Determine Colour Names from RGB-->
+        <script src="./js/quantize.js"></script><!-- Dependency for Color Classifier -->
+        <script src="./js/jquery.justifiedGallery.min.js"></script><!-- Make Images appear in correct order -->
+        
+        <!-- Our Script -->
+        <script src="./js/loadRecentPhotos.js"></script><!-- Loads recent photos - move to main.js maybe? -->
+        <script src="./js/main.js"></script><!-- Main javscript file, everything from filtering images by colour to converting between rgb and hex -->
+        
+        <script>
+        $(function(){
+            //Load photos
+            loadRecentPhotos();
+            
+            //Functionality for the filter menu
+            $('#filter').click(function(){
+                $('#filtermenu').toggle();
+            });
+            $('.colour').click(function(){
+                $('#filtermenu').toggle();
+                var arr = $(this).data('colors');
+                arr = arr.split(',');
+                console.log('Colour Picked');
+                filter(arr);
+            });
+            
+            /*$(window).scroll(function(){
+                if(((window.innerHeight + window.scrollY) >= document.body.offsetHeight)){
+                    console.log('At Bottom!');
+                    loadNextPage(2);
+                    //$('#popular').justifiedGallery('norewind');
+                }
+            });*/
+            
+            
+            function filter(colors){
+                console.log('Colours Picked: ', colors);
+                if(!sessionStorage.getItem('loaded')){
+                    console.log('Not previously loaded, setting filtered to true and saving content');
+                    sessionStorage.setItem('filtered', true);
+                    sessionStorage.setItem('originalContent', $('#content').html());
+                }else{
+                    console.log('previously loaded');
+                    if(sessionStorage.getItem('originalContent')){
+                        console.log('Saved content found - Setting Content to saved content');
+                        $('#content').html(sessionStorage.getItem('originalContent'));
+                    }else{
+                        console.log('No Content found, loading recent photos');
+                        loadRecentPhotos();
+                    }
+                }
+                $('.colorTaggedImage').each(function(){
+                    var colorList = $(this).data('colors');
+                    console.log(colorList);
+                    if(colorList){
+                        colorList = colorList.split(',');
+                        if(!checkAtts(colors,colorList)){
+                            $(this).parent().remove();
+                        }
+                    }
+                });
+                $('#popular').justifiedGallery({
+                    'rowHeight': 200,
+                    'lastRow': 'justify',
+                    'margins': 6
+                });
+            }
+            
+            //Check if user is logged in, and decide what button to show: login or upload
+            if(window.config.loggedIn){
+                $('#logocntnr').after('<a href="upload.html"><img src="img/icon-upload.png" alt="Upload" id="upload"></a>');
+            }else{
+                $('#logocntnr').after('<a href="#" id="loginbutton"><img src="img/icon-login.png" alt="login" id="login"></a>');
+            }
+            //Initiate login process
+            $('#loginbutton').click(function(e){
+                e.preventDefault();
+                
+                //Open login screen
+                var url = 'login.html';
+                var popup = window.open(url, 'Login via Flickr');
+                
+                //once opened, check the url of the popup every second
+                var waitForUrl = setInterval(function(){
+                    var popupUrl = popup.location.href.split('?'); //Split url into url and data
+                    
+                    //If user has been redirected to our specified redirect URl, continue
+                    if(popupUrl[0] == 'http://ciniviu.com/mngr-auth-success/'){
+                        //Convert returned data to a valid JSON string (will be parsed later)
+                        var auth = JSON.parse('{"' + decodeURI(popupUrl[1]).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '", "loggedIn": true}');
+                        //Stop checking url
+                        clearInterval(waitForUrl);
+                        //Close popup
+                        popup.close();
+                        //Save our data
+                        finishAuthentication(auth);
+                    }
+                }, 1000);
+                ;
+            });
+        });
+        </script>
+    </body>
+</html>

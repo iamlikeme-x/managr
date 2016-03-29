@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login via Flickr</title>
+    <script src="./js/jquery-2.2.0.min.js"></script>
+    <script src="./js/oauth.min.js"></script>
+    <!-- OAuth.js & Dependencies-->
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+<<<<<<< HEAD
+    <script src="./js/oauth.min.js"></script>
+    <body>
+        
+        <div id="loader">Loading...</div>
+        
+        <script>
+            $(function(){
+                
+                window.resizeTo(860, 700);
+                
+                var oauth = OAuth({
+                    consumer: {
+                        public: 'f558724ba49174dc32d3828d1a7302cd',
+                        secret: 'a1e01a255a63aabc'
+                    },
+                    signature_method: 'HMAC-SHA1'
+                });
+                var request_data = {
+                    url: 'https://www.flickr.com/services/oauth/request_token',
+                    method: 'GET'
+                };
+                
+                $.ajax({
+                        url: request_data.url,
+                        type: request_data.method,
+                        data: oauth.authorize(request_data)
+                }).done(function(data) {
+                    var data = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+                    window.location.href = 'https://www.flickr.com/services/oauth/authorize?perms=delete&oauth_token='+data.oauth_token;
+                    
+                });
+                
+            });
+        </script>
+    </body>
+=======
+    <script src="./js/main.js"></script>
+    <script src="./js/config.js"></script>
+    <!-- loads our config -->
+</head>
+
+<body>
+    <p id="test"></p>
+
+    <table style="font-family: 'Courier New';">
+        <tr>
+            <td>Ours</td>
+            <td id="oursig"></td>
+        </tr>
+        <tr>
+            <td>Flickr</td>
+            <td id="flickrsig"></td>
+        </tr>
+    </table>
+
+
+    <script>
+        $(function() {
+            var data = createOauth();
+            var data = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+            saveData(data);
+            window.location.href = 'https://www.flickr.com/services/oauth/authorize?perms=delete&oauth_token=' + data.oauth_token;
+        });
+
+    </script>
+</body>
+
+>>>>>>> refs/remotes/origin/master
+</html>

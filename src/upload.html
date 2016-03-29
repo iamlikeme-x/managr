@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Upload Photo</title>
+        
+        <link rel="stylesheet" href="css/style.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <script src="./js/loadConfig.js"></script>
+    </head>
+    
+    <body>
+        <div class="wrapper" id="header">
+            <header>
+                <a href="index.html"><img src="img/logo.png" alt="Logo" id="logo"></a>
+            </header>
+        </div>
+        
+        <div class="wrapper" id="upload-content">
+            <div id="uploadbutton">
+                <h1>Click or drop file here to upload</h1>
+                <form action="#" method="post" enctype="multipart/form-data" id="uploadform">
+                    <input type="file" name="img" id="img" onchange="loadImg();">
+                    <input type="hidden" name="api_key" value="">
+                    <input type="hidden" name="auth_token" value="">
+                    <input type="hidden" name="api_sig" value="">
+                </form>
+                <div id="filetransfer" style="display:none;">
+                    <div id="task"></div>
+                    <div id="progressbar" data-task="" data-percent="0%"><div id="done"></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="./js/jquery-2.2.0.min.js"></script>
+        <script>
+            function loadImg(){
+                $('#progressbar').attr('data-task', '');
+                $('#progressbar').attr('data-percent', '0%');
+                $('#done').animate({width: '0%'});
+                $('#filetransfer').show();
+                console.log('called');
+                var file = document.getElementById('img').files[0];
+                var reader = new FileReader();
+                reader.readAsText(file, 'UTF-8');
+                reader.onload = sendImg;
+                reader.onprogress = progress;
+            }
+            function sendImg(event){
+                var result = event.target.result;
+                var fileName = document.getElementById('img').files[0].name;
+                $.post('https://api.flickr.com/services/upload/', {data: result, name: fileName, api_key: 'f558724ba49174dc32d3828d1a7302cd'}, function(data){
+                    console.log(data);
+                });
+            }
+            
+            function progress(event){
+                if(event.lengthComputable){
+                    console.log(event.loaded+'/'+event.total);
+                    pc = (event.loaded/event.total)*100;
+                    $('#progressbar').attr('data-task', 'Preparing image...');
+                    $('#done').animate({width: pc+'%'}, 500);
+                    $('#progressbar').attr('data-percent', pc+'%');
+                }
+            }
+        </script>
+    </body>
+</html>
