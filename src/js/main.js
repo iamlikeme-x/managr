@@ -42,21 +42,6 @@ function loadImgs(arr) {
         a.append(img);
         $('#popular').append(a);
         img.on('load', function () {
-            //            console.log(img);
-            //            var colorThief = new ColorThief();
-            //            palette = colorThief.getPalette(img[0], 4);
-            //            var color = [];
-            //
-            //            //Iterate through each color in palette
-            //            $.each(palette, function(i){
-            //                var colorName = window.classifier.classify(palette[i][0], palette[i][1], palette[i][2]); //Convert color in palette from RGB to english color name
-            //                if(color.indexOf(colorName) == -1){
-            //                    color.push(colorName);
-            //                }
-            //            });
-            //            
-            //            //Append determined colors to element as data-colors attribute
-            //            $(this).attr('data-colors', color.join());
 
             $("#popular").justifiedGallery({
                 'rowHeight': 200,
