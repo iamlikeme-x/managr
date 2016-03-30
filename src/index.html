@@ -78,56 +78,17 @@
                 filter(arr);
             });
             
-//            function filter(colors){
-//                console.log('Filter Function passed: ', colors);
-//                //If cached content is found, reset before filtering otherwise it will filter down to nothing recursively
-//                /*if(sessionStorage.getItem('cachedContent')){
-//                    $('#content').html(sessionStorage.getItem('originalContent'));
-//                }else{ //No cached content found
-//                    loadRecentPhotos();
-//                }*/
-//                
-//                console.log($('.colorTaggedImage'));
-//                
-//                //Iterate through images
-//                $('.colorTaggedImage').each(function(i, el){
-//                    console.log(i, el);
-//                    var colorList = $(this).data('colors'); //Get colors from element
-//                    
-//                    console.log(colorList);
-//                    
-//                    //Check colors were found
-//                    if(colorList){
-//                        console.log(colorList);
-//                        colorList = colorList.split(','); //split colors into array
-//                        if(!checkAtts(colors,colorList)){ //check if element colors match given colors to filter against
-//                            $(this).parent().remove(); //If no match, remove element
-//                        }
-//                    }else{ //If no colours found, put a warning in console
-//                        console.warn('No colors found for #'+$(this).attr('id'));
-//                    }
-//                });
-//                
-//                //Redraw justified gallery
-//                $('#popular').justifiedGallery({
-//                    'rowHeight': 200,
-//                    'lastRow': 'justify',
-//                    'margins': 6
-//                });
-//            }
-            
             function filter(colors){
                 var cachedContent = $(sessionStorage.getItem('cachedContent'));
                 
                 if(cachedContent){
+                    console.log("Cached");
                     cachedContent = classify(cachedContent);
                     $(cachedContent).find('img').each(function(){
                         var colorList = $(this).data('colors');                        
                         if(colorList){
                             colorList = colorList.split(',');
                             if(!checkAtts(colors, colorList)){
-                                console.log("Filtered");
-                                console.log($(this).parent());
                                 $(this).parent().remove();
                             }
                         }else{
