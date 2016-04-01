@@ -17,6 +17,7 @@
 *.dll
 *.o
 *.so
+*.scssc
 
 # OS generated files #
 ######################
