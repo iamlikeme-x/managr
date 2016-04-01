@@ -34,22 +34,20 @@ document.onkeydown = function (pressed) {
     ///////////////////////////////////////
 
 function loadImgs(arr) {
+    $('#content').hide();
     var arrLength = Object.size(arr);
     counter = 1;
     $.each(arr, function (key, value) {
-        var img = $('<img src="' + value + '" id="img' + counter + '" class="colorTaggedImage">');
-        var a = $('<a id="img-container' + counter + '" href="#" title="' + key.replace(/"/g, '&quot;') + '"></a>');
-        a.append(img);
-        $('#popular').append(a);
-        img.on('load', function () {
-            if(img[0].id == "img50"){
-                $("#popular").justifiedGallery({
-                    'rowHeight': 200,
-                    'lastRow': 'justify',
-                    'margins': 6
-                });
-            }
-        });
+        $('#popular').append($('<a id="img-container' + counter + '" href="#" title="' + key.replace(/"/g, '&quot;') + '"><img src="' + value + '" id="img' + counter + '" class="colorTaggedImage"></a>'));
+        if(counter == 50){
+            $("#popular").justifiedGallery({
+                'rowHeight': 200,
+                'lastRow': 'justify',
+                'margins': 6
+            });
+
+            $('#content').show();
+        }
         counter++;
     });
 
