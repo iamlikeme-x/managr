@@ -66,6 +66,6 @@ function finishAuthentication(cfg) {
         extra: ["oauth_verifier"]
     }
     var data = createOauth(opts);
-    var data = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+    var data = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '","loggedIn":true}');
     saveData(data);
 }
