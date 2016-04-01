@@ -80,10 +80,11 @@
             
             function filter(colors){
                 var cachedContent = $(sessionStorage.getItem('cachedContent'));
-                
+                var classified = sessionStorage.getItem('classified') == 'true';
                 if(cachedContent){
-                    console.log("Cached");
-                    cachedContent = classify(cachedContent);
+                    if(!classified){
+                        cachedContent = classify(cachedContent);
+                    }
                     $(cachedContent).find('img').each(function(){
                         var colorList = $(this).data('colors');                        
                         if(colorList){

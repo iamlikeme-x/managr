@@ -42,12 +42,13 @@ function loadImgs(arr) {
         a.append(img);
         $('#popular').append(a);
         img.on('load', function () {
-
-            $("#popular").justifiedGallery({
-                'rowHeight': 200,
-                'lastRow': 'justify',
-                'margins': 6
-            });
+            if(img[0].id == "img50"){
+                $("#popular").justifiedGallery({
+                    'rowHeight': 200,
+                    'lastRow': 'justify',
+                    'margins': 6
+                });
+            }
         });
         counter++;
     });
@@ -70,6 +71,7 @@ function checkAtts(a, obj) {
 }
 
 function classify(content) {
+    console.log(content);
     content.find('img').each(function () {
         
         var colorThief = new ColorThief();
@@ -83,6 +85,8 @@ function classify(content) {
             $(this).attr('data-colors', colors.join(','));
         }
     });
+    sessionStorage.setItem('cachedContent', content[0].outerHTML);
+    sessionStorage.setItem('classified', 'true');
     return content;
 }
 

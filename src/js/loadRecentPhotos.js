@@ -56,10 +56,6 @@ function jsonFlickrApi(data){
         var url = 'https://farm'+farm+'.staticflickr.com/'+server+'/'+id+'_'+secret+'.jpg';
         
         imgUrls[title] = url;
-        /*if((i+1)%3==0) {
-            splitList.push(imgUrls);
-            imgUrls = {};
-        }*/
     }
     
     var executionTime = (new Date().getTime() - window.timestamp)/1000;
