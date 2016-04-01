@@ -60,18 +60,15 @@ html{
                 }
             }
             
-            #filtermenu{
+            #filtermenu, #settingsmenu{
                 display: none;
-                position: absolute;
-                top: 80%;
-                right: 2.5%;
+                position: absolute; top: 80%;
                 background: $white;
-                height: 225px;
-                width: 275px;
                 z-index: 1000;
-                text-align: left;
                 border-radius: 5px;
                 box-shadow: 0 0 24px -2px rgba(120,120,120,1);
+                padding: 1%;
+                right: 2%;
                 
                 &:before{
                     content: '';
@@ -80,8 +77,16 @@ html{
                     border-right: 15px solid transparent;
                     position: absolute;
                     top: -12px;
-                    left: 68.5%;
-                    transform: translateX(-50%);
+                }
+            }
+            
+            #filtermenu{
+                height: 225px;
+                width: 275px;
+                text-align: left;
+                
+                &:before{
+                    right: 78px;
                 }
                 
                 h2{
@@ -109,6 +114,16 @@ html{
                         &#black{background:$black;}
                     }
                 }
+            }
+            #settingsmenu{
+                height: 225px;
+                width: 275px;
+                
+                &:before{
+                    right: 16px;
+                }
+                
+                h2, ul, li{margin: 5px; padding: 5px;}
             }
         }
         

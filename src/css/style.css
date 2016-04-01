@@ -43,27 +43,29 @@ html {
             outline: none; }
           .wrapper#header header img#filter:focus ~ #filtermenu {
             display: block; }
-      .wrapper#header header #filtermenu {
+      .wrapper#header header #filtermenu, .wrapper#header header #settingsmenu {
         display: none;
         position: absolute;
         top: 80%;
-        right: 2.5%;
         background: #FCFEFF;
-        height: 225px;
-        width: 275px;
         z-index: 1000;
-        text-align: left;
         border-radius: 5px;
-        box-shadow: 0 0 24px -2px #787878; }
-        .wrapper#header header #filtermenu:before {
+        box-shadow: 0 0 24px -2px #787878;
+        padding: 1%;
+        right: 2%; }
+        .wrapper#header header #filtermenu:before, .wrapper#header header #settingsmenu:before {
           content: '';
           border-bottom: 12px solid #FCFEFF;
           border-left: 15px solid transparent;
           border-right: 15px solid transparent;
           position: absolute;
-          top: -12px;
-          left: 68.5%;
-          transform: translateX(-50%); }
+          top: -12px; }
+      .wrapper#header header #filtermenu {
+        height: 225px;
+        width: 275px;
+        text-align: left; }
+        .wrapper#header header #filtermenu:before {
+          right: 78px; }
         .wrapper#header header #filtermenu h2 {
           margin: 12px;
           margin-top: 21px;
@@ -91,6 +93,14 @@ html {
               background: #FCFEFF; }
             .wrapper#header header #filtermenu .colours .colour#black {
               background: #383838; }
+      .wrapper#header header #settingsmenu {
+        height: 225px;
+        width: 275px; }
+        .wrapper#header header #settingsmenu:before {
+          right: 16px; }
+        .wrapper#header header #settingsmenu h2, .wrapper#header header #settingsmenu ul, .wrapper#header header #settingsmenu li {
+          margin: 5px;
+          padding: 5px; }
   .wrapper#content #popular {
     width: 100%;
     max-width: 1024px;
