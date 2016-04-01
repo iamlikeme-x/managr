@@ -26,17 +26,34 @@
         </script>
         <div class="wrapper" id="header">
             <header>
+                <!--Logo Image-->
                 <a href="index.html" id="logocntnr"><img src="img/logo.png" alt="Logo" id="logo"></a>
+                
+                <!--Hamburger Menu-->
+                <a href="#" id="settingsbutton"><img src="img/icon-login.png" alt="login" id="login"></a>
+                <div id="settingsmenu">
+                    <h2>Menu</h2>
+                    <ul>
+                        <li><a href="#">Upload</a></li>
+                        <li><a href="#">blah</a></li>
+                        <li><a href="#">blah</a></li>
+                        <li><a href="#">blah</a></li>
+                    </ul>
+
+                    <div id="account"></div>
+                </div>
+                    
+                <!--Filter icon and menu -->
                 <img src="img/icon-filter.png" alt="Filter" id="filter">
                 <div id="filtermenu">
                     <h2>Filter</h2>
                     <div class="colours">
-                        <div class="colour" id="red" data-colors="redviolet,red,redorange,yelloworange"></div>
+                        <div class="colour" id="red" data-colors="redviolet,red,redorange,yelloworange" data-title="Red"></div>
                         <div class="colour" id="blue"data-colors="bluegreen,blue,blueviolet,violet"></div>
                         <div class="colour" id="green" data-colors="yellowgreen,green,bluegreen"></div>
                         <div class="colour" id="yellow" data-colors="yelloworange,orange,redorange"></div>
                         <div class="colour" id="black" data-colors="black,grey"></div>
-                        <div class="colour" id="white" data-colors="white"></div>
+                        <div class="colour" id="x" data-colors=''></div>
                     </div>
                 </div>
             </header>
@@ -63,15 +80,28 @@
         });
         $(function(){
             
+            $(document).click(function(e){
+                var ids = ['filtermenu', 'settingsmenu', 'filter', 'login'];
+                if(ids.indexOf(e.target.id) != -1){
+                    console.log('Clicked on menu');
+                    return;
+                }else{
+                    $('#filtermenu, #settingsmenu').fadeOut();
+                }
+                /*if($('#filtermenu, #settingsmenu').is(':visible')){
+                    $('#filtermenu, #settingsmenu').fadeOut();
+                }*/
+            });
             
             //Load photos
             loadRecentPhotos();
             
             //Functionality for the filter menu
             $('#filter').click(function(){
-                $('#filtermenu').toggle();
+                $('#filtermenu').fadeToggle(200);
+                $('#settingsmenu').fadeOut(200);
             });
-            $('.colour').click(function(){
+            $('.colour:not(#x)').click(function(){
                 $('#filtermenu').toggle();
                 var arr = $(this).data('colors');
                 arr = arr.split(',');
@@ -109,12 +139,12 @@
                 }
             }
             
-            //Check if user is logged in, and decide what button to show: login or upload
-            if(window.config.loggedIn){
-                $('#logocntnr').after('<a href="upload.html"><img src="img/icon-upload.png" alt="Upload" id="upload"></a>');
-            }else{
-                $('#logocntnr').after('<a href="#" id="loginbutton"><img src="img/icon-login.png" alt="login" id="login"></a>');
-            }
+            $('#settingsbutton').click(function(e){
+                e.preventDefault();
+                $('#settingsmenu').fadeToggle(200);
+                $('#filtermenu').fadeOut(200);
+            });
+            
             //Initiate login process
             $('#loginbutton').click(function(e){
                 e.preventDefault();

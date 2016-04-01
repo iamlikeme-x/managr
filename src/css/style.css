@@ -43,42 +43,46 @@ html {
             outline: none; }
           .wrapper#header header img#filter:focus ~ #filtermenu {
             display: block; }
-      .wrapper#header header #filtermenu {
+      .wrapper#header header #filtermenu, .wrapper#header header #settingsmenu {
         display: none;
         position: absolute;
         top: 80%;
-        right: 2.5%;
         background: #FCFEFF;
-        height: 225px;
-        width: 275px;
         z-index: 1000;
-        text-align: left;
         border-radius: 5px;
-        box-shadow: 0 0 24px -2px #787878; }
-        .wrapper#header header #filtermenu:before {
+        box-shadow: 0 0 24px -2px #787878;
+        padding: 1%;
+        right: 2%;
+        text-align: left; }
+        .wrapper#header header #filtermenu:before, .wrapper#header header #settingsmenu:before {
           content: '';
           border-bottom: 12px solid #FCFEFF;
           border-left: 15px solid transparent;
           border-right: 15px solid transparent;
           position: absolute;
-          top: -12px;
-          left: 68.5%;
-          transform: translateX(-50%); }
-        .wrapper#header header #filtermenu h2 {
+          top: -12px; }
+        .wrapper#header header #filtermenu h2, .wrapper#header header #settingsmenu h2 {
           margin: 12px;
           margin-top: 21px;
           font-weight: 400; }
+      .wrapper#header header #filtermenu {
+        height: 225px;
+        width: 275px; }
+        .wrapper#header header #filtermenu:before {
+          right: 78px; }
         .wrapper#header header #filtermenu .colours {
           display: flex;
           flex-wrap: wrap;
           justify-content: center; }
           .wrapper#header header #filtermenu .colours .colour {
             cursor: pointer;
-            box-shadow: 0 5px 20px -2px #787878;
+            position: relative;
+            box-shadow: 0 0 20px -2px #787878;
+            transition: .2s;
             width: 60px;
             height: 60px;
             margin: 10px;
-            border-radius: 100%; }
+            border-radius: 50%; }
             .wrapper#header header #filtermenu .colours .colour#red {
               background: #FF505F; }
             .wrapper#header header #filtermenu .colours .colour#blue {
@@ -91,6 +95,54 @@ html {
               background: #FCFEFF; }
             .wrapper#header header #filtermenu .colours .colour#black {
               background: #383838; }
+            .wrapper#header header #filtermenu .colours .colour:after {
+              transition: .2s;
+              content: '';
+              height: 0;
+              width: 0;
+              line-height: 50px;
+              text-align: center;
+              background: transparent;
+              border-radius: 50%;
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+              z-index: 10002; }
+            .wrapper#header header #filtermenu .colours .colour:before {
+              transition: all .2s ease-in-out;
+              content: url(https://upload.wikimedia.org/wikipedia/commons/9/90/Check_mark_23x20_02.svg);
+              display: none;
+              height: 20px;
+              width: 20px;
+              line-height: 20px;
+              text-align: center;
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+              z-index: 10003; }
+            .wrapper#header header #filtermenu .colours .colour:hover:after {
+              background: rgba(252, 254, 255, 0.6);
+              height: 50px;
+              width: 50px; }
+            .wrapper#header header #filtermenu .colours .colour:hover:before {
+              display: block; }
+      .wrapper#header header #settingsmenu {
+        height: 225px;
+        width: 275px; }
+        .wrapper#header header #settingsmenu:before {
+          right: 16px; }
+        .wrapper#header header #settingsmenu ul {
+          list-style-type: none;
+          margin: 12px;
+          margin-top: 21px; }
+          .wrapper#header header #settingsmenu ul li {
+            margin: 15px 0; }
   .wrapper#content #popular {
     width: 100%;
     max-width: 1024px;
