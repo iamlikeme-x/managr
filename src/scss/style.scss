@@ -164,8 +164,14 @@ html{
                 &:before{
                     right: 16px;
                 }
-                
-                h2, ul, li{margin: 5px; padding: 5px;}
+                ul{
+                    list-style-type: none;
+                    margin: 12px;
+                    margin-top: 21px;
+                    li{
+                       margin: 15px 0; 
+                    }
+                }
             }
         }
         

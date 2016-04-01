@@ -137,9 +137,12 @@ html {
         width: 275px; }
         .wrapper#header header #settingsmenu:before {
           right: 16px; }
-        .wrapper#header header #settingsmenu h2, .wrapper#header header #settingsmenu ul, .wrapper#header header #settingsmenu li {
-          margin: 5px;
-          padding: 5px; }
+        .wrapper#header header #settingsmenu ul {
+          list-style-type: none;
+          margin: 12px;
+          margin-top: 21px; }
+          .wrapper#header header #settingsmenu ul li {
+            margin: 15px 0; }
   .wrapper#content #popular {
     width: 100%;
     max-width: 1024px;
