@@ -4,7 +4,7 @@
 function loadRecentPhotos(pageNum){
     if(sessionStorage.getItem('cachedContent')){
         $('#content').html(sessionStorage.getItem('cachedContent'));
-        
+        $('#loadercntnr').hide();
         $("#popular").justifiedGallery({
             'rowHeight': 200,
             'lastRow': 'justify',

@@ -45,7 +45,9 @@ function loadImgs(arr) {
                 'lastRow': 'justify',
                 'margins': 6
             });
-            $('#loadercntnr').fadeOut(200);
+            if(!$('#loadercntnr').is(':hidden')){
+                $('#loadercntnr').fadeOut(200);
+            }
             $('#popular').fadeIn(200);
             
         }
