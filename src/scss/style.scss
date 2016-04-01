@@ -84,6 +84,7 @@ html{
                     margin: 12px;
                     margin-top: 21px;
                     font-weight: 400;
+                    vertical-align: middle;
                 }
             }
             
@@ -166,10 +167,32 @@ html{
                 }
                 ul{
                     list-style-type: none;
-                    margin: 12px;
-                    margin-top: 21px;
+                    margin: 21px 12px;
+                    line-height: normal;
+                    
                     li{
-                       margin: 15px 0; 
+                        margin: 10px 0;
+                        height: 22px;
+                        //border-bottom: 1px solid $blue;
+                            
+                        a{
+                            text-decoration: none;
+                            color: $blue;
+                            font-weight: 400;
+                            display: flex;
+                            align-items: center;
+                            
+                            &:hover{
+                                color: darken($blue, 50%);
+                            }
+                            
+                            img{
+                                height: 20px;
+                                width: 30px;
+                                margin: 0;
+                                margin-right: 5px;
+                            }
+                        }
                     }
                 }
             }
@@ -180,7 +203,35 @@ html{
         height: 100px;
     }
     &#content{
-        //background: -webkit-linear-gradient(left, $blue, $lblue2);
+        position: relative;
+        
+        
+        $spread: 75px;
+        $color: rgba(183,227,240,0.8);
+        #loadercntnr{
+            position: absolute;
+            left: 0; right: 0; top: 0; bottom: 0;
+            height: 85vh;
+            display: block;
+            
+            #loader{
+                height: 30px; width: 30px;
+                border-radius: 50%;
+                position: absolute;
+                left: 0; top: 0; bottom: 0; right: 0;
+                margin: auto;
+                box-shadow: ($spread) (0) 0 darken($color, 12.5%),
+                            (($spread/3)*2.1) (($spread/3)*2.1) 0 darken($color, 25%),
+                            (0) ($spread) 0 darken($color, 37.5%),
+                            ((-$spread/3)*2.1) (($spread/3)*2.1) 0 darken($color, 50%),
+                            (-$spread) (0) 0 darken($color, 62.5%),
+                            ((-$spread/3)*2.1) ((-$spread/3)*2.1) 0 darken($color, 75%),
+                            (0) (-$spread) 0 darken($color, 87.5%),
+                            (($spread/3)*2.1) ((-$spread/3)*2.1) 0 $color;
+                -webkit-animation: spin 2s infinite ease;//cubic-bezier(.27,.14,.73,.86);
+            }
+        }
+        
         #popular{
             width: 100%;
             max-width: 1024px;
@@ -268,4 +319,13 @@ html{
             }
         }
     }
+}
+
+@-webkit-keyframes spin{
+  from{
+    -webkit-transform: rotate(0deg);
+  }
+  to{
+    -webkit-transform: rotate(360deg);
+  }
 }
