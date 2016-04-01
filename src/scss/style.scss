@@ -26,6 +26,8 @@ html{
         background: -webkit-linear-gradient(left, $blue, $lblue2);
         line-height: 16.66%;
         text-align: center;
+        width: 100%;
+        height: 100px;
         
         header{
             width: 100%;
@@ -196,22 +198,18 @@ html{
                 }
             }
         }
-        
-        
-        width: 100%;
-        height: 100px;
     }
     &#content{
         position: relative;
         
-        
         $spread: 75px;
         $color: rgba(183,227,240,0.8);
         #loadercntnr{
-            position: absolute;
-            left: 0; right: 0; top: 0; bottom: 0;
-            height: 85vh;
+            position: fixed;
+            left: 0; right: 0; top: 100px; bottom: 0;
+            height: 87vh;
             display: block;
+            background: rgba(255,255,255,0.8);
             
             #loader{
                 height: 30px; width: 30px;

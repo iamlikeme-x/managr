@@ -161,13 +161,14 @@ html {
   .wrapper#content {
     position: relative; }
     .wrapper#content #loadercntnr {
-      position: absolute;
+      position: fixed;
       left: 0;
       right: 0;
-      top: 0;
+      top: 100px;
       bottom: 0;
-      height: 85vh;
-      display: block; }
+      height: 87vh;
+      display: block;
+      background: rgba(255, 255, 255, 0.8); }
       .wrapper#content #loadercntnr #loader {
         height: 30px;
         width: 30px;
