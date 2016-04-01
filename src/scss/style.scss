@@ -69,6 +69,7 @@ html{
                 box-shadow: 0 0 24px -2px rgba(120,120,120,1);
                 padding: 1%;
                 right: 2%;
+                text-align: left;
                 
                 &:before{
                     content: '';
@@ -78,21 +79,20 @@ html{
                     position: absolute;
                     top: -12px;
                 }
-            }
-            
-            #filtermenu{
-                height: 225px;
-                width: 275px;
-                text-align: left;
-                
-                &:before{
-                    right: 78px;
-                }
                 
                 h2{
                     margin: 12px;
                     margin-top: 21px;
                     font-weight: 400;
+                }
+            }
+            
+            #filtermenu{
+                height: 225px;
+                width: 275px;
+                
+                &:before{
+                    right: 78px;
                 }
                 
                 .colours{
@@ -101,17 +101,59 @@ html{
                     justify-content: center;
                     .colour{
                         cursor: pointer;
-                        box-shadow: 0 5px 20px -2px rgba(120,120,120,1);
+                        position: relative;
+                        box-shadow: 0 0 20px -2px rgba(120,120,120,1);
+                        transition: .2s;
                         width: 60px;
                         height: 60px;
                         margin: 10px;
-                        border-radius: 100%;
+                        border-radius: 50%;
                         &#red{background:$red;}
                         &#blue{background:$altblue;}
                         &#green{background:$green;}
                         &#yellow{background:$yellow;}
                         &#white{background:$white;}
                         &#black{background:$black;}
+                        
+                        &:after{
+                            transition: .2s;
+                            content: '';
+                            height: 0;
+                            width: 0;
+                            line-height: 50px;
+                            text-align: center;
+                            background: transparent;
+                            border-radius: 50%;
+                            position: absolute;
+                            left: 0; right: 0; top: 0; bottom: 0;
+                            margin: auto;
+                            z-index: 10002;
+                        }
+                        
+                        &:before{
+                            transition: all .2s ease-in-out;
+                            content: url(https://upload.wikimedia.org/wikipedia/commons/9/90/Check_mark_23x20_02.svg);
+                            display: none;
+                            height: 20px; width: 20px;
+                            line-height: 20px;
+                            text-align: center;
+                            position: absolute;
+                            left: 0; right: 0; top: 0; bottom: 0;
+                            margin: auto;
+                            z-index: 10003;
+                        }
+                        
+                        &:hover{
+                            //-webkit-filter: brightness(70%);
+                            &:after{
+                                background: rgba($white, 0.6);
+                                height: 50px; width: 50px;
+                            }
+                            
+                            &:before{
+                                display: block;
+                            }
+                        }
                     }
                 }
             }
