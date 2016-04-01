@@ -2,7 +2,6 @@
 
 //Function to be called
 function loadRecentPhotos(pageNum){
-    
     if(sessionStorage.getItem('cachedContent')){
         $('#content').html(sessionStorage.getItem('cachedContent'));
         
@@ -14,6 +13,8 @@ function loadRecentPhotos(pageNum){
         
         return;
     }
+    
+    $('#loadercntnr').fadeIn(200);
     
     var method = 'flickr.interestingness.getList';
     var apiKey = 'f558724ba49174dc32d3828d1a7302cd';

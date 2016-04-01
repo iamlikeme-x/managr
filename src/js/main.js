@@ -34,7 +34,7 @@ document.onkeydown = function (pressed) {
     ///////////////////////////////////////
 
 function loadImgs(arr) {
-    $('#content').hide();
+    $('#popular').fadeOut(200);
     var arrLength = Object.size(arr);
     counter = 1;
     $.each(arr, function (key, value) {
@@ -45,8 +45,9 @@ function loadImgs(arr) {
                 'lastRow': 'justify',
                 'margins': 6
             });
-
-            $('#content').show();
+            $('#loadercntnr').fadeOut(200);
+            $('#popular').fadeIn(200);
+            
         }
         counter++;
     });
