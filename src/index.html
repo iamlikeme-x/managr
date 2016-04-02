@@ -30,12 +30,12 @@
                 <a href="index.html" id="logocntnr"><img src="img/logo.png" alt="Logo" id="logo"></a>
                 
                 <!--Hamburger Menu-->
-                <a href="#" id="settingsbutton"><img src="img/icon-login.png" alt="login" id="login"></a>
+                <a href="#" id="settingsbutton"><img src="img/icon-login.png" alt="login" id="hamburger"></a>
                 <div id="settingsmenu">
                     <h2>Menu</h2>
                     <ul>
                         <li><a href="#"><img src="./img/upload-icon.svg" alt="Upload">Upload</a></li>
-                        <li><a href="#">blah</a></li>
+                        <li><a id="login" href="#">login</a></li>
                         <li><a href="#">blah</a></li>
                         <li><a href="#">blah</a></li>
                     </ul>
@@ -86,7 +86,7 @@
         $(function(){
             
             $(document).click(function(e){
-                var ids = ['filtermenu', 'settingsmenu', 'filter', 'login'];
+                var ids = ['filtermenu', 'settingsmenu', 'filter', 'hamburger'];
                 if(ids.indexOf(e.target.id) != -1){
                     console.log('Clicked on menu');
                     return;
@@ -148,15 +148,19 @@
             });
             
             //Initiate login process
-            $('#loginbutton').click(function(e){
+            $('#login').click(function(e){
                 e.preventDefault();
                 
                 //Open login screen
                 var url = 'login.html';
                 var popup = window.open(url, 'Login via Flickr');
-                
                 //once opened, check the url of the popup every second
-                var waitForUrl = setInterval(function(){
+                waitForUrl = setInterval(function(){
+                    if(popup.closed){
+                        clearInterval(waitForUrl);
+                        return;
+                    }
+                    
                     var popupUrl = popup.location.href.split('?'); //Split url into url and data
                     
                     //If user has been redirected to our specified redirect URl, continue
@@ -171,7 +175,6 @@
                         finishAuthentication(auth);
                     }
                 }, 1000);
-                ;
             });
         });
         </script>
