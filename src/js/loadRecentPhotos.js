@@ -37,10 +37,10 @@ function loadRecentPhotos(pageNum){
     });
 }
 
-//JSONP callback - automatically called when the ajax call in loadRecentPhotos() completes
 /*
-* @param {Object} data all photos returned from Flickr
-*/
+ * JSONP callback - automatically called when the ajax call in loadRecentPhotos() completes
+ * @param object data all photos returned from Flickr
+ */
 function jsonFlickrApi(data){
     var splitList = [];
     var imgUrls = {};
@@ -56,7 +56,7 @@ function jsonFlickrApi(data){
 
         var url = 'https://farm'+farm+'.staticflickr.com/'+server+'/'+id+'_'+secret+'.jpg';
         
-        imgUrls[title] = url;
+        imgUrls[title] = [url, id, secret];
     }
     
     var executionTime = (new Date().getTime() - window.timestamp)/1000;

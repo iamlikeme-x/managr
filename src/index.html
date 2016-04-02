@@ -27,10 +27,10 @@
         <div class="wrapper" id="header">
             <header>
                 <!--Logo Image-->
-                <a href="index.html" id="logocntnr"><img src="img/logo.png" alt="Logo" id="logo"></a>
+                <a href="index.html" id="logocntnr"><img src="./img/logo.png" alt="Logo" id="logo"></a>
                 
                 <!--Hamburger Menu-->
-                <a href="#" id="settingsbutton"><img src="img/icon-login.png" alt="login" id="hamburger"></a>
+                <a href="#" id="settingsbutton"><img src="./img/menu-icon.svg" alt="login" id="hamburger"></a>
                 <div id="settingsmenu">
                     <h2>Menu</h2>
                     <ul>
@@ -65,6 +65,11 @@
             </div>
             <div id="popular"></div>
         </div>
+        <div class="imgInfo">
+            <h2 id="title">Title</h2>
+            <p id="desc">Description</p>
+            <p id="user">User</p>
+        </div>
         
         <!-- Exeternal Scripts -->
         <script src="./js/color-thief.js"></script><!-- -->
@@ -84,7 +89,6 @@
             window.classifier.learn(data);
         });
         $(function(){
-            
             $(document).click(function(e){
                 var ids = ['filtermenu', 'settingsmenu', 'filter', 'hamburger'];
                 if(ids.indexOf(e.target.id) != -1){
@@ -110,37 +114,6 @@
                 filter(arr);
             });
             
-            function filter(colors){
-                var cachedContent = $(sessionStorage.getItem('cachedContent'));
-                var classified = sessionStorage.getItem('classified') == 'true';
-                if(cachedContent){
-                    if(!classified){
-                        cachedContent = classify(cachedContent);
-                    }
-                    $(cachedContent).find('img').each(function(){
-                        var colorList = $(this).data('colors');                        
-                        if(colorList){
-                            colorList = colorList.split(',');
-                            if(!checkAtts(colors, colorList)){
-                                $(this).parent().remove();
-                            }
-                        }else{
-                            console.warn('No colors found for #'+$(this).attr('id'));
-                        }
-                    });
-                    $('#content').html(cachedContent);
-                    
-                    $('#popular').justifiedGallery({
-                        'rowHeight': 200,
-                        'lastRow': 'justify',
-                        'margins': 6
-                    });
-                }else{
-                    loadRecentPhotos();
-                    filter(colors);
-                }
-            }
-            
             $('#settingsbutton').click(function(e){
                 e.preventDefault();
                 $('#settingsmenu').fadeToggle(200);
@@ -153,7 +126,7 @@
                 
                 //Open login screen
                 var url = 'login.html';
-                var popup = window.open(url, 'Login via Flickr');
+                window.popup = window.open(url, 'Login via Flickr');
                 //once opened, check the url of the popup every second
                 waitForUrl = setInterval(function(){
                     if(popup.closed){
@@ -161,7 +134,7 @@
                         return;
                     }
                     
-                    var popupUrl = popup.location.href.split('?'); //Split url into url and data
+                    var popupUrl = window.popup.location.href.split('?'); //Split url into url and data
                     
                     //If user has been redirected to our specified redirect URl, continue
                     if(popupUrl[0] == 'http://ciniviu.com/mngr-auth-success/'){
@@ -170,13 +143,46 @@
                         //Stop checking url
                         clearInterval(waitForUrl);
                         //Close popup
-                        popup.close();
+                        window.popup.close();
                         //Save our data
                         finishAuthentication(auth);
                     }
                 }, 1000);
             });
+            
+            //Show Image Info on Click
+            $('a[id^="img-container"]').click(function(e){
+                e.preventDefault();
+                var data = {
+                    'id': $(this).data('id'),
+                    'secret': $(this).data('secret'),
+                    'title': $(this).data('title')
+                };
+                console.log(data);
+                
+                $.ajax({
+                    method: 'GET',
+                    url: 'https://api.flickr.com/services/rest/',
+                    data: {
+                        method: 'flickr.photos.getInfo',
+                        api_key: 'f558724ba49174dc32d3828d1a7302cd',
+                        format: 'json',
+                        photo_id: data.id,
+                        secret: data.secret,
+                        jsoncallback: 'loadPhotoInfo'
+                    },
+                    dataType: 'jsonp'
+                });
+            });
         });
+            
+        function loadPhotoInfo(data){
+            console.log(data);
+            $('.imgInfo #title').html(data.photo.title._content);
+            $('.imgInfo #desc').html(data.photo.description._content.replace(/\n/g, "<br>"));
+            $('.imgInfo #user').html(data.photo.owner.username);
+            $('.imgInfo').fadeIn();
+        }
         </script>
     </body>
 </html>
