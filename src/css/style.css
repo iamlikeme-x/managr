@@ -6,6 +6,18 @@ html {
   background: #FCFEFF;
   font-family: 'Open Sans', sans-serif; }
 
+.imgInfo {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 500px;
+  width: 500px;
+  background: red;
+  display: none; }
+
 .wrapper {
   text-align: center;
   width: 100%; }
@@ -33,7 +45,9 @@ html {
           position: absolute;
           right: 4%;
           top: 50%;
-          transform: translateY(-50%); }
+          transform: translateY(-50%);
+          width: 23px;
+          height: 23px; }
         .wrapper#header header img#filter {
           position: absolute;
           right: 10%;
