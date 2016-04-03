@@ -20,10 +20,20 @@ var win = gui.Window.get();
 //Keyboard shortcuts
 document.onkeydown = function (pressed) {
     if (pressed.ctrlKey === true && pressed.keyCode === 116) {
+        if(window.popup){
+            if(!window.popup.isclosed){
+                window.popup.close();
+            }
+        }
         pressed.preventDefault();
         win.reloadDev();
         return false;
     } else if (pressed.keyCode === 116) {
+        if(window.popup){
+            if(!window.popup.isclosed){
+                window.popup.close();
+            }
+        }
         pressed.preventDefault();
         win.reload();
         return false;
