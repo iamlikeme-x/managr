@@ -21,10 +21,20 @@ var win = gui.Window.get();
 document.onkeydown = function (pressed) {
         if (pressed.ctrlKey === true && pressed.keyCode === 116) {
             pressed.preventDefault();
+            if(popup){
+                if(!popup.closed){
+                    popup.close();
+                }
+            }
             win.reloadDev();
             return false;
         } else if (pressed.keyCode === 116) {
             pressed.preventDefault();
+            if(popup){
+                if(!popup.closed){
+                    popup.close();
+                }
+            }
             win.reload();
             return false;
         }
