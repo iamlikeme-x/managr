@@ -17,7 +17,7 @@
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
         <script src="./js/oauth.min.js"></script>
         
-        <script src="./js/config.js"></script> <!-- loads our config -->
+        <script src="./js/config.js"></script> <!-- functions to our config -->
     </head>
     <body>
         <script>
@@ -78,7 +78,7 @@
         <script src="./js/jquery.justifiedGallery.min.js"></script><!-- Make Images appear in correct order -->
         
         <!-- Our Script -->
-        <script src="./js/loadRecentPhotos.js"></script><!-- Loads recent photos - move to main.js maybe? -->
+        <script src="./js/photo.js"></script><!-- Handles all photo functions -->
         <script src="./js/main.js"></script><!-- Main javscript file, everything from filtering images by colour to converting between rgb and hex -->
         <script src="./js/authenticate.js"></script> <!-- Handles all of the authentication functions -->
         
@@ -175,14 +175,6 @@
                 });
             });
         });
-            
-        function loadPhotoInfo(data){
-            console.log(data);
-            $('.imgInfo #title').html(data.photo.title._content);
-            $('.imgInfo #desc').html(data.photo.description._content.replace(/\n/g, "<br>"));
-            $('.imgInfo #user').html(data.photo.owner.username);
-            $('.imgInfo').fadeIn();
-        }
         </script>
     </body>
 </html>

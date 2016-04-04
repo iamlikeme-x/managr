@@ -43,30 +43,6 @@ document.onkeydown = function (pressed) {
 //END Node Webkit Stuff              //
 ///////////////////////////////////////
 
-function loadImgs(arr) {
-    $('#popular').fadeOut(200);
-    var arrLength = Object.size(arr);
-    counter = 1;
-    $.each(arr, function (key, val) {
-        $('#popular').append($('<a id="img-container' + counter + '" href="#" data-id="'+val[1]+'" data-secret="'+val[2]+'" data-title="' + key.replace(/"/g, '&quot;') + '"><img src="' + val[0] + '" id="img' + counter + '" class="colorTaggedImage"></a>'));
-        if(counter == 50){
-            $("#popular").justifiedGallery({
-                'rowHeight': 200,
-                'lastRow': 'justify',
-                'margins': 6
-            });
-            if(!$('#loadercntnr').is(':hidden')){
-                $('#loadercntnr').fadeOut(200);
-            }
-            $('#popular').fadeIn(200);
-            
-        }
-        counter++;
-    });
-
-    sessionStorage.setItem('cachedContent', $('#content').html());
-}
-
 function checkAtts(a, obj) {
     // a: attributes to check.
     // obj: object to check against.
