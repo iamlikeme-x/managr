@@ -23,8 +23,10 @@ document.onkeydown = function (pressed) {
         if(window.popup){
             if(!window.popup.isclosed){
                 window.popup.close();
+                console.log("closed");
             }
         }
+        sessionStorage.clear();
         pressed.preventDefault();
         win.reloadDev();
         return false;
@@ -32,6 +34,16 @@ document.onkeydown = function (pressed) {
         if(window.popup){
             if(!window.popup.isclosed){
                 window.popup.close();
+                console.log("closed");
+            }
+        }
+        var expire = sessionStorage.getItem('cachedExpire');
+        if(expire) {
+            var expireTime = 300*1000 // n*1000 where n = seconds to get milliseconds
+            var now = new Date().getTime();
+            expired = now-parseInt(expire);
+            if (expired >= expireTime) {
+                sessionStorage.clear();
             }
         }
         pressed.preventDefault();
@@ -57,26 +69,6 @@ function checkAtts(a, obj) {
     return false;
 }
 
-function classify(content) {
-    console.log(content);
-    content.find('img').each(function () {
-        
-        var colorThief = new ColorThief();
-        palette = colorThief.getPalette(this, 4);
-        var colors = [];
-        for(i = 0; i < palette.length; i++){
-            var colorName = window.classifier.classify(palette[i][0], palette[i][1], palette[i][2]);
-            if (colors.indexOf(colorName) == -1) {
-                colors.push(colorName);
-            }
-            $(this).attr('data-colors', colors.join(','));
-        }
-    });
-    sessionStorage.setItem('cachedContent', content[0].outerHTML);
-    sessionStorage.setItem('classified', 'true');
-    return content;
-}
-
 
 function getHex(r, g, b) {
     return '#' + this.byte2Hex(r) + this.byte2Hex(g) + this.byte2Hex(b);
@@ -87,33 +79,3 @@ function byte2Hex(n) {
     return String(nybHexString.substr((n >> 4) & 0x0f, 1)) + nybHexString.substr(n & 0x0f, 1);
 }
 
-function filter(colors){
-    var cachedContent = $(sessionStorage.getItem('cachedContent'));
-    var classified = sessionStorage.getItem('classified') == 'true';
-    if(cachedContent){
-        if(!classified){
-            cachedContent = classify(cachedContent);
-        }
-        $(cachedContent).find('img').each(function(){
-            var colorList = $(this).data('colors');                        
-            if(colorList){
-                colorList = colorList.split(',');
-                if(!checkAtts(colors, colorList)){
-                    $(this).parent().remove();
-                }
-            }else{
-                console.warn('No colors found for #'+$(this).attr('id'));
-            }
-        });
-        $('#content').html(cachedContent);
-
-        $('#popular').justifiedGallery({
-            'rowHeight': 200,
-            'lastRow': 'justify',
-            'margins': 6
-        });
-    }else{
-        loadRecentPhotos();
-        filter(colors);
-    }
-}

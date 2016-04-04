@@ -79,6 +79,7 @@ function loadImgs(arr) {
     counter = 1;
     $.each(arr, function (key, val) {
         $('#popular').append($('<a id="img-container' + counter + '" href="#" data-id="'+val[1]+'" data-secret="'+val[2]+'" data-title="' + key.replace(/"/g, '&quot;') + '"><img src="' + val[0] + '" id="img' + counter + '" class="colorTaggedImage"></a>'));
+        counter++;
         if(counter == 50){
             $("#popular").justifiedGallery({
                 'rowHeight': 200,
@@ -91,8 +92,67 @@ function loadImgs(arr) {
             $('#popular').fadeIn(200);
             
         }
-        counter++;
+        
     });
 
     sessionStorage.setItem('cachedContent', $('#content').html());
+    sessionStorage.setItem('cachedExpire', (new Date().getTime()).toString());
+}
+
+
+function filter(colors){
+    var cachedContent = $(sessionStorage.getItem('cachedContent'));
+    var classified = sessionStorage.getItem('classified') == 'true';
+    if(cachedContent){
+        if(!classified){
+            cachedContent = classify(cachedContent);
+        }
+        $(cachedContent).find('img').each(function(){
+            var colorList = $(this).data('colors');                        
+            if(colorList){
+                colorList = colorList.split(',');
+                if(!checkAtts(colors, colorList)){
+                    $(this).parent().remove();
+                }
+            }else{
+                console.warn('No colors found for #'+$(this).attr('id'));
+            }
+        });
+        $('#content').html(cachedContent);
+
+        $('#popular').justifiedGallery({
+            'rowHeight': 200,
+            'lastRow': 'justify',
+            'margins': 6
+        });
+    }else{
+        loadRecentPhotos();
+        filter(colors);
+    }
+}
+
+function classify(content) {
+    console.log(content);
+    content.find('img').each(function () {
+        
+        var colorThief = new ColorThief();
+        palette = colorThief.getPalette(this, 4);
+        var colors = [];
+        for(i = 0; i < palette.length; i++){
+            var colorName = window.classifier.classify(palette[i][0], palette[i][1], palette[i][2]);
+            if (colors.indexOf(colorName) == -1) {
+                colors.push(colorName);
+            }
+            $(this).attr('data-colors', colors.join(','));
+        }
+    });
+    if(!$('#loadercntnr').is(':hidden')){
+        $('#loadercntnr').hide();
+    }
+    if($('#popular').is(':hidden')){
+        $('#popular').show();
+    }
+    sessionStorage.setItem('cachedContent', $(content).prop('outerHTML'));
+    sessionStorage.setItem('classified', 'true');
+    return content;
 }
