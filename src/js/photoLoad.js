@@ -1,11 +1,3 @@
-function loadPhotoInfo(data) {
-    console.log(data);
-    $('.imgInfo #title').html(data.photo.title._content);
-    $('.imgInfo #desc').html(data.photo.description._content.replace(/\n/g, "<br>"));
-    $('.imgInfo #user').html(data.photo.owner.username);
-    $('.imgInfo').fadeIn();
-}
-
 //"Function to be called" - Decided to keep Jake's description of this function in here...
 
 function loadRecentPhotos(pageNum) {
@@ -105,6 +97,7 @@ function filter(colors){
     var classified = sessionStorage.getItem('classified') == 'true';
     if(cachedContent){
         if(!classified){
+            console.log("asd");
             cachedContent = classify(cachedContent);
         }
         $(cachedContent).find('img').each(function(){
@@ -132,7 +125,7 @@ function filter(colors){
 }
 
 function classify(content) {
-    console.log(content);
+    var cache = "";
     content.find('img').each(function () {
         
         var colorThief = new ColorThief();
@@ -152,7 +145,10 @@ function classify(content) {
     if($('#popular').is(':hidden')){
         $('#popular').show();
     }
-    sessionStorage.setItem('cachedContent', $(content).prop('outerHTML'));
+    content.each(function() {
+        cache += $(this).prop('outerHTML');
+    });
+    sessionStorage.setItem('cachedContent', cache);
     sessionStorage.setItem('classified', 'true');
     return content;
 }
