@@ -92,6 +92,10 @@
             window.classifier.learn(data);
         });
         $(function(){
+            
+            //Load photos
+            loadRecentPhotos();
+            
             $(document).click(function(e){
                 var ids = ['filtermenu', 'settingsmenu', 'filter', 'hamburger'];
                 if(ids.indexOf(e.target.id) != -1){
@@ -102,8 +106,6 @@
                 }
             });
             
-            //Load photos
-            loadRecentPhotos();
             
             //Functionality for the filter menu
             $('#filter').click(function(){
@@ -154,35 +156,38 @@
             });
             
             //Show Image Info on Click
-            $('a[id^="img-container"]').click(function(e){
-                e.preventDefault();
-                
-                $('.imgInfo #info').hide();
-                $('.imgInfo #loader').show();
-                
-                var data = {
-                    'id': $(this).data('id'),
-                    'secret': $(this).data('secret'),
-                    'title': $(this).data('title')
-                };
-                
-                $('.imgInfo').css({
-                    top: $(this).height() + parseInt($(this).css('top'))
-                });
-                $('.imgInfo').fadeIn(100);
-                
-                $.ajax({
-                    method: 'GET',
-                    url: 'https://api.flickr.com/services/rest/',
-                    data: {
-                        method: 'flickr.photos.getInfo',
-                        api_key: 'f558724ba49174dc32d3828d1a7302cd',
-                        format: 'json',
-                        photo_id: data.id,
-                        secret: data.secret,
-                        jsoncallback: 'loadPhotoData'
-                    },
-                    dataType: 'jsonp'
+            $('#popular').bind("DOMSubtreeModified",function(){
+                console.log("Changed");
+                $('a[id^="img-container"]').click(function(e){
+                    e.preventDefault();
+
+                    $('.imgInfo #info').hide();
+                    $('.imgInfo #loader').show();
+
+                    var data = {
+                        'id': $(this).data('id'),
+                        'secret': $(this).data('secret'),
+                        'title': $(this).data('title')
+                    };
+
+                    $('.imgInfo').css({
+                        top: $(this).height() + parseInt($(this).css('top'))
+                    });
+                    $('.imgInfo').fadeIn(200);
+
+                    $.ajax({
+                        method: 'GET',
+                        url: 'https://api.flickr.com/services/rest/',
+                        data: {
+                            method: 'flickr.photos.getInfo',
+                            api_key: 'f558724ba49174dc32d3828d1a7302cd',
+                            format: 'json',
+                            photo_id: data.id,
+                            secret: data.secret,
+                            jsoncallback: 'loadPhotoData'
+                        },
+                        dataType: 'jsonp'
+                    });
                 });
             });
         });

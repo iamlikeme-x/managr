@@ -21,15 +21,16 @@ html{
 .imgInfo{
     box-sizing: border-box;
     position: absolute;
-    margin: auto;
-    width: 500px;
+    margin-left: -webkit-calc((100% - 1024px)/2 + 6px);
+    margin-right: -webkit-calc((100% - 1024px)/2 + 6px);
+    margin-top: 6px;
+    max-width: 1012px;
     background: rgba($black, 0.99);
     padding: 10px;
     display: none;
     text-align: left;
     min-height: 200px;
     width: -webkit-calc(100% - 12px);
-    margin: 6px;
     
     $spread: 50px;
     $color: rgba(227,227,227,0.8);
@@ -59,6 +60,9 @@ html{
             text-transform: capitalize;
         }
     }
+}
+@media screen and ( max-width: 1024px ){
+    .imgInfo{ margin-left: 6px; margin-right: 6px; }
 }
 
 .wrapper{
@@ -243,6 +247,7 @@ html{
             }
         }
     }
+    
     &#content{
         position: relative;
         
