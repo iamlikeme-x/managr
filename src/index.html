@@ -30,14 +30,14 @@
                 <a href="index.html" id="logocntnr"><img src="./img/logo.png" alt="Logo" id="logo"></a>
                 
                 <!--Hamburger Menu-->
-                <a href="#" id="settingsbutton"><img src="./img/menu-icon.svg" alt="login" id="hamburger"></a>
+                <a href="javascript:;" id="settingsbutton"><img src="./img/menu-icon.svg" alt="login" id="hamburger"></a>
                 <div id="settingsmenu">
                     <h2>Menu</h2>
                     <ul>
-                        <li><a href="#"><img src="./img/upload-icon.svg" alt="Upload">Upload</a></li>
-                        <li><a id="login" href="#">login</a></li>
-                        <li><a href="#">blah</a></li>
-                        <li><a href="#">blah</a></li>
+                        <li><a href="javascript:;"><img src="./img/upload-icon.svg" alt="Upload">Upload</a></li>
+                        <li><a id="login" href="javascript:;">login</a></li>
+                        <li><a href="javascript:;">blah</a></li>
+                        <li><a href="javascript:;">blah</a></li>
                     </ul>
 
                     <div id="account"></div>
@@ -64,11 +64,14 @@
                 <div id="loader"></div>
             </div>
             <div id="popular"></div>
-        </div>
-        <div class="imgInfo">
-            <h2 id="title">Title</h2>
-            <p id="desc">Description</p>
-            <p id="user">User</p>
+            <div class="imgInfo">
+                <div id="info">
+                    <h2 id="title">Title</h2>
+                    <p id="desc">Description</p>
+                    <p id="user">User</p>
+                </div>
+                <div id="loader"><div id="spinner"></div></div>
+            </div>
         </div>
         
         <!-- Exeternal Scripts -->
@@ -153,12 +156,20 @@
             //Show Image Info on Click
             $('a[id^="img-container"]').click(function(e){
                 e.preventDefault();
+                
+                $('.imgInfo #info').hide();
+                $('.imgInfo #loader').show();
+                
                 var data = {
                     'id': $(this).data('id'),
                     'secret': $(this).data('secret'),
                     'title': $(this).data('title')
                 };
-                console.log(data);
+                
+                $('.imgInfo').css({
+                    top: $(this).height() + parseInt($(this).css('top'))
+                });
+                $('.imgInfo').fadeIn(100);
                 
                 $.ajax({
                     method: 'GET',
@@ -169,12 +180,21 @@
                         format: 'json',
                         photo_id: data.id,
                         secret: data.secret,
-                        jsoncallback: 'loadPhotoInfo'
+                        jsoncallback: 'loadPhotoData'
                     },
                     dataType: 'jsonp'
                 });
             });
         });
+        
+        function loadPhotoData(data) {
+            console.log(data);
+            $('.imgInfo #title').html(data.photo.title._content);
+            $('.imgInfo #desc').html(data.photo.description._content.replace(/\n/g, "<br>"));
+            $('.imgInfo #user').html(data.photo.owner.username);
+            $('.imgInfo #loader').hide();
+            $('.imgInfo #info').show();
+        }
         </script>
     </body>
 </html>

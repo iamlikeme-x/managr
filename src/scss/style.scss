@@ -19,13 +19,46 @@ html{
 }
 
 .imgInfo{
-    position: fixed;
-    left: 0; right: 0; top: 0; bottom: 0;
+    box-sizing: border-box;
+    position: absolute;
     margin: auto;
-    height: 500px;
     width: 500px;
-    background: red;
+    background: rgba($black, 0.99);
+    padding: 10px;
     display: none;
+    text-align: left;
+    min-height: 200px;
+    width: -webkit-calc(100% - 12px);
+    margin: 6px;
+    
+    $spread: 50px;
+    $color: rgba(227,227,227,0.8);
+    #loader{
+        #spinner{
+            height: 20px; width: 20px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0; top: 0; bottom: 0; right: 0;
+            margin: auto;
+            box-shadow: ($spread) (0) 0 darken($color, 12.5%),
+                        (($spread/3)*2.1) (($spread/3)*2.1) 0 darken($color, 25%),
+                        (0) ($spread) 0 darken($color, 37.5%),
+                        ((-$spread/3)*2.1) (($spread/3)*2.1) 0 darken($color, 50%),
+                        (-$spread) (0) 0 darken($color, 62.5%),
+                        ((-$spread/3)*2.1) ((-$spread/3)*2.1) 0 darken($color, 75%),
+                        (0) (-$spread) 0 darken($color, 87.5%),
+                        (($spread/3)*2.1) ((-$spread/3)*2.1) 0 $color;
+            -webkit-animation: spin 2s infinite ease;//cubic-bezier(.27,.14,.73,.86);
+        }
+    }
+    
+    #info{
+        display: none;
+        color: $white;
+        #title{
+            text-transform: capitalize;
+        }
+    }
 }
 
 .wrapper{
