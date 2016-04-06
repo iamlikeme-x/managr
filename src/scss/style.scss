@@ -195,7 +195,7 @@ html{
                         
                         &:hover{
                             &:after{
-                                background: rgba($white, 0.6);
+                                background: darken(rgba($white, 0.6),2.5%); // so you can see it on the white?
                                 height: 50px; width: 50px;
                             }
                             

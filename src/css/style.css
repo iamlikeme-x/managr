@@ -165,7 +165,7 @@ html {
               margin: auto;
               z-index: 10003; }
             .wrapper#header header #filtermenu .colours .colour:hover:after {
-              background: rgba(252, 254, 255, 0.6);
+              background: rgba(239, 250, 255, 0.6);
               height: 50px;
               width: 50px; }
             .wrapper#header header #filtermenu .colours .colour:hover:before {

@@ -113,7 +113,7 @@
                 $('#settingsmenu').fadeOut(200);
             });
             $('.colour:not(#x)').click(function(){
-                $('#filtermenu').toggle();
+                $('#filtermenu').fadeToggle(200);
                 var arr = $(this).data('colors');
                 arr = arr.split(',');
                 filter(arr);
@@ -157,7 +157,6 @@
             
             //Show Image Info on Click
             $('#popular').bind("DOMSubtreeModified",function(){
-                console.log("Changed");
                 $('a[id^="img-container"]').click(function(e){
                     e.preventDefault();
 
@@ -197,8 +196,8 @@
             $('.imgInfo #title').html(data.photo.title._content);
             $('.imgInfo #desc').html(data.photo.description._content.replace(/\n/g, "<br>"));
             $('.imgInfo #user').html(data.photo.owner.username);
-            $('.imgInfo #loader').hide();
-            $('.imgInfo #info').show();
+            $('.imgInfo #loader').fadeOut(400);
+            $('.imgInfo #info').fadeIn(200);
         }
         </script>
     </body>

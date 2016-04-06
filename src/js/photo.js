@@ -118,13 +118,24 @@ function filter(colors){
             'lastRow': 'justify',
             'margins': 6
         });
+        
+        
     }else{
         loadRecentPhotos();
         filter(colors);
     }
+    if(!$('#loadercntnr').is(':hidden')){
+        console.log("hiding");
+        $('#loadercntnr').fadeOut(400);
+    }
+    if($('#popular').is(':hidden')){
+        $('#popular').fadeIn(200);
+    }
 }
 
 function classify(content) {
+    $('#popular').hide();
+    console.log(content);
     var cache = "";
     content.find('img').each(function () {
         
@@ -139,16 +150,10 @@ function classify(content) {
             $(this).attr('data-colors', colors.join(','));
         }
     });
-    if(!$('#loadercntnr').is(':hidden')){
-        $('#loadercntnr').hide();
-    }
-    if($('#popular').is(':hidden')){
-        $('#popular').show();
-    }
     content.each(function() {
         cache += $(this).prop('outerHTML');
     });
-    sessionStorage.setItem('cachedContent', cache);
+    sessionStorage.setItem('cachedContent', cache.replace(/undefined/g, ""));
     sessionStorage.setItem('classified', 'true');
     return content;
 }
