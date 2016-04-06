@@ -158,36 +158,39 @@
             //Show Image Info on Click
             $('#popular').bind("DOMSubtreeModified",function(){
                 console.log("Changed");
-                $('a[id^="img-container"]').click(function(e){
-                    e.preventDefault();
-
-                    $('.imgInfo #info').hide();
-                    $('.imgInfo #loader').show();
-
-                    var data = {
-                        'id': $(this).data('id'),
-                        'secret': $(this).data('secret'),
-                        'title': $(this).data('title')
-                    };
-
-                    $('.imgInfo').css({
-                        top: $(this).height() + parseInt($(this).css('top'))
-                    });
-                    $('.imgInfo').fadeIn(200);
-
-                    $.ajax({
-                        method: 'GET',
-                        url: 'https://api.flickr.com/services/rest/',
-                        data: {
-                            method: 'flickr.photos.getInfo',
-                            api_key: 'f558724ba49174dc32d3828d1a7302cd',
-                            format: 'json',
-                            photo_id: data.id,
-                            secret: data.secret,
-                            jsoncallback: 'loadPhotoData'
-                        },
-                        dataType: 'jsonp'
-                    });
+                //$('a[id^="img-container"]').click(function(e){
+                $(document).click(function(e){
+                    if(e.target.id.indexOf("img-container") > -1){
+                        e.preventDefault();
+    
+                        $('.imgInfo #info').hide();
+                        $('.imgInfo #loader').show();
+    
+                        var data = {
+                            'id': $(this).data('id'),
+                            'secret': $(this).data('secret'),
+                            'title': $(this).data('title')
+                        };
+    
+                        $('.imgInfo').css({
+                            top: $(this).height() + parseInt($(this).css('top'))
+                        });
+                        $('.imgInfo').fadeIn(200);
+    
+                        $.ajax({
+                            method: 'GET',
+                            url: 'https://api.flickr.com/services/rest/',
+                            data: {
+                                method: 'flickr.photos.getInfo',
+                                api_key: 'f558724ba49174dc32d3828d1a7302cd',
+                                format: 'json',
+                                photo_id: data.id,
+                                secret: data.secret,
+                                jsoncallback: 'loadPhotoData'
+                            },
+                            dataType: 'jsonp'
+                        });
+                    }
                 });
             });
         });
