@@ -12,13 +12,97 @@ html {
   margin-left: -webkit-calc((100% - 1024px)/2 + 6px);
   margin-right: -webkit-calc((100% - 1024px)/2 + 6px);
   margin-top: 6px;
-  max-width: 1012px;
-  background: rgba(56, 56, 56, 0.99);
+  background: rgba(34, 34, 34, 0.99);
   padding: 10px;
   display: none;
   text-align: left;
   min-height: 200px;
   width: -webkit-calc(100% - 12px); }
+  .imgInfo #arrow {
+    content: '';
+    display: block;
+    border-style: solid;
+    width: 0;
+    height: 0;
+    border-width: 0 15px 15px 15px;
+    border-color: rgba(34, 34, 34, 0.99) transparent rgba(34, 34, 34, 0.99);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%); }
+  .imgInfo #info {
+    color: #b0b0b0; }
+    .imgInfo #info .close-button {
+      cursor: pointer;
+      background: #222222;
+      width: 30px;
+      height: 30px;
+      display: block;
+      position: absolute;
+      top: 5px;
+      right: 5px; }
+      .imgInfo #info .close-button:before, .imgInfo #info .close-button:after {
+        content: '';
+        font-style: normal;
+        height: 30px;
+        width: 3px;
+        border-radius: 3px;
+        background: #d2d2d2;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto; }
+      .imgInfo #info .close-button:before {
+        transform: rotate(45deg); }
+      .imgInfo #info .close-button:after {
+        transform: rotate(-45deg); }
+    .imgInfo #info #titlewrap {
+      display: inline; }
+      .imgInfo #info #titlewrap #title {
+        font-weight: 400;
+        display: inline;
+        font-size: 24px;
+        color: #d6d6d6; }
+      .imgInfo #info #titlewrap #userwrap {
+        display: inline;
+        margin-left: 5px;
+        color: #7d7d7d; }
+        .imgInfo #info #titlewrap #userwrap #user {
+          text-decoration: none;
+          transition: .2s;
+          color: #7d7d7d; }
+          .imgInfo #info #titlewrap #userwrap #user:hover {
+            color: #d6d6d6; }
+    .imgInfo #info #desc {
+      margin: 10px 0;
+      line-height: 25px;
+      font-size: 18px;
+      overflow: hidden;
+      padding-bottom: 40px; }
+      .imgInfo #info #desc a {
+        color: inherit;
+        transition: .2s; }
+        .imgInfo #info #desc a:hover {
+          color: #d6d6d6; }
+    .imgInfo #info #see-more {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      background: linear-gradient(#d6d6d6, #bdbdbd);
+      font-weight: 400;
+      padding: 8px;
+      text-decoration: none;
+      color: #222222;
+      vertical-align: middle;
+      font-size: 18px;
+      line-height: 18px;
+      border-radius: 3px;
+      transition: all .2s linear; }
+      .imgInfo #info #see-more:hover {
+        box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.5); }
   .imgInfo #loader #spinner {
     height: 20px;
     width: 20px;
@@ -29,13 +113,8 @@ html {
     bottom: 0;
     right: 0;
     margin: auto;
-    box-shadow: 50px 0 0 rgba(195, 195, 195, 0.8), 35px 35px 0 rgba(163, 163, 163, 0.8), 0 50px 0 rgba(131, 131, 131, 0.8), -35px 35px 0 rgba(100, 100, 100, 0.8), -50px 0 0 rgba(68, 68, 68, 0.8), -35px -35px 0 rgba(36, 36, 36, 0.8), 0 -50px 0 rgba(4, 4, 4, 0.8), 35px -35px 0 rgba(227, 227, 227, 0.8);
+    box-shadow: 50px 0 0 rgba(195, 195, 195, 0.8), 35.0px 35.0px 0 rgba(163, 163, 163, 0.8), 0 50px 0 rgba(131, 131, 131, 0.8), -35.0px 35.0px 0 rgba(100, 100, 100, 0.8), -50px 0 0 rgba(68, 68, 68, 0.8), -35.0px -35.0px 0 rgba(36, 36, 36, 0.8), 0 -50px 0 rgba(4, 4, 4, 0.8), 35.0px -35.0px 0 rgba(227, 227, 227, 0.8);
     -webkit-animation: spin 2s infinite ease; }
-  .imgInfo #info {
-    display: none;
-    color: #FCFEFF; }
-    .imgInfo #info #title {
-      text-transform: capitalize; }
 
 @media screen and (max-width: 1024px) {
   .imgInfo {
@@ -196,7 +275,9 @@ html {
                 margin: 0;
                 margin-right: 5px; }
   .wrapper#content {
-    position: relative; }
+    position: relative;
+    max-width: 1024px;
+    margin: auto; }
     .wrapper#content #loadercntnr {
       position: fixed;
       left: 0;
