@@ -79,3 +79,10 @@ function byte2Hex(n) {
     return String(nybHexString.substr((n >> 4) & 0x0f, 1)) + nybHexString.substr(n & 0x0f, 1);
 }
 
+function stripScripts(s) {
+    var elem = $("<p>"+s+"<script>alert('hahaha');</script></p>");
+    elem.find('script').each(function(){
+        $(this).remove();
+    });
+    return elem.prop('outerHTML');
+}
