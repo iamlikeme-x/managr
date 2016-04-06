@@ -101,8 +101,7 @@
             $(document).click(function(e){
                 e.preventDefault();
                 var ids = ['filtermenu', 'settingsmenu', 'filter', 'hamburger'];
-                var classes = ['imgInfo'];
-                if(classes.indexOf(e.target.classList) == -1) {
+                if(!$(e.target).closest(".imgInfo").length) { //Has the user clicked on .imgInfo?
                     if(!$('.imgInfo').is(':hidden') && e.target.id.indexOf("img") == -1){
                         $('.imgInfo').fadeOut(400);
                     }
@@ -110,7 +109,6 @@
                 if(ids.indexOf(e.target.id) == -1){
                     $('#filtermenu, #settingsmenu').fadeOut(); // hide menu's
                     // if clicked on an image, show info
-                    console.log(e.target.id);
                     if(e.target.id.indexOf("img") > -1 && typeof $('.imgInfo') !== "null"){
                         img = $(e.target).parent();
                         if($('.imgInfo').is(":hidden")){
