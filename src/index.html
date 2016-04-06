@@ -96,7 +96,7 @@
             //Load photos
             loadRecentPhotos();
             
-            $(document).load().click(function(e){
+            $(document).click(function(e){
                 e.preventDefault();
                 var ids = ['filtermenu', 'settingsmenu', 'filter', 'hamburger'];
                 if(ids.indexOf(e.target.id) != -1){
