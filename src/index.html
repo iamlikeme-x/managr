@@ -111,6 +111,7 @@
                     // if clicked on an image, show info
                     if(e.target.id.indexOf("img") > -1 && typeof $('.imgInfo') !== "null"){
                         img = $(e.target).parent();
+                        console.log(img.position());
                         if($('.imgInfo').is(":hidden")){
                             $('.imgInfo #info').hide();
                             $('.imgInfo #loader').fadeIn(200);
@@ -127,6 +128,9 @@
 
                         $('.imgInfo').css({
                             top: img.height() + parseInt(img.css('top'))
+                        });
+                        $('#arrow').css({
+                            left: img.position().left + img.width()/2
                         });
                         $('.imgInfo').fadeIn(200);
 
@@ -203,10 +207,13 @@
         });
         
         function loadPhotoData(data) {
-            console.log(data);
             $('.imgInfo #title').html(data.photo.title._content);
             $('.imgInfo #desc').html(stripScripts(data.photo.description._content.replace(/\n/g, "<br>")));
-            $('.imgInfo #user').html(data.photo.owner.username);
+            if(data.photo.owner.realname){
+                $('.imgInfo #user').html(data.photo.owner.realname);
+            } else {
+                $('.imgInfo #user').html(data.photo.owner.username);
+            }
             $('.imgInfo #loader').fadeOut(400);
             $('.imgInfo #info').fadeIn(200);
         }
