@@ -40,7 +40,7 @@ html{
 		border-color: rgba(#222222, 0.99) transparent rgba(#222222, 0.99);
 		position: absolute;
 		top: 0; left: 0;
-		transform: translateY(-100%);
+		transform: translateY(-100%) translateX(-50%);
 	}
 	
 	#info{

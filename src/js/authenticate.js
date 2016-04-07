@@ -24,7 +24,7 @@ function createOauth(opts) {
     }
     var request_data = {
         url: 'https://www.flickr.com/services/oauth/' + opts.service,
-        method: opts.method,
+        method: opts.method
     };
 
     if (opts.extra && opts.extra.length >= 1) {
@@ -68,4 +68,31 @@ function finishAuthentication(cfg) {
     var data = createOauth(opts);
     var data = JSON.parse('{"' + decodeURI(data).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '","loggedIn":true}');
     saveData(data);
+}
+
+function signCallData(method, opts){
+    var request_data = {
+        url: 'https://api.flickr.com/services/rest/'+method,
+        method: 'GET'
+    };
+    
+    if(opts){
+        request_data.opts = opts;
+    }
+    
+    var config = getConfig();
+    var token = {
+        public: config.oauth_token,
+        secret: config.oauth_token_secret
+    };
+    
+    oauth = new OAuth({
+        consumer: {
+            public: 'f558724ba49174dc32d3828d1a7302cd',
+            secret: 'a1e01a255a63aabc'
+        },
+        signature_method: 'HMAC-SHA1'
+    });
+    
+    return oauth.authorize(request_data, token);
 }

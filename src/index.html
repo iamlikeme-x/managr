@@ -101,7 +101,8 @@
             $(document).click(function(e){
                 e.preventDefault();
                 var ids = ['filtermenu', 'settingsmenu', 'filter', 'hamburger'];
-                if(!$(e.target).closest(".imgInfo").length) { //Has the user clicked on .imgInfo?
+                var classes = ['imgInfo'];
+                if(classes.indexOf(e.target.classList) == -1) {
                     if(!$('.imgInfo').is(':hidden') && e.target.id.indexOf("img") == -1){
                         $('.imgInfo').fadeOut(400);
                     }
@@ -109,9 +110,9 @@
                 if(ids.indexOf(e.target.id) == -1){
                     $('#filtermenu, #settingsmenu').fadeOut(); // hide menu's
                     // if clicked on an image, show info
+                    console.log(e.target.id);
                     if(e.target.id.indexOf("img") > -1 && typeof $('.imgInfo') !== "null"){
                         img = $(e.target).parent();
-                        console.log(img.position());
                         if($('.imgInfo').is(":hidden")){
                             $('.imgInfo #info').hide();
                             $('.imgInfo #loader').fadeIn(200);
@@ -128,9 +129,6 @@
 
                         $('.imgInfo').css({
                             top: img.height() + parseInt(img.css('top'))
-                        });
-                        $('#arrow').css({
-                            left: img.position().left + img.width()/2
                         });
                         $('.imgInfo').fadeIn(200);
 
@@ -207,13 +205,10 @@
         });
         
         function loadPhotoData(data) {
+            console.log(data);
             $('.imgInfo #title').html(data.photo.title._content);
             $('.imgInfo #desc').html(stripScripts(data.photo.description._content.replace(/\n/g, "<br>")));
-            if(data.photo.owner.realname){
-                $('.imgInfo #user').html(data.photo.owner.realname);
-            } else {
-                $('.imgInfo #user').html(data.photo.owner.username);
-            }
+            $('.imgInfo #user').html(data.photo.owner.username);
             $('.imgInfo #loader').fadeOut(400);
             $('.imgInfo #info').fadeIn(200);
         }

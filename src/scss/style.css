@@ -1,14 +1,11 @@
-/* line 11, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
 * {
   margin: 0;
   padding: 0; }
 
-/* line 16, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
 html {
   background: #FCFEFF;
   font-family: 'Open Sans', sans-serif; }
 
-/* line 21, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
 .imgInfo {
   box-sizing: border-box;
   position: absolute;
@@ -21,7 +18,6 @@ html {
   text-align: left;
   min-height: 200px;
   width: -webkit-calc(100% - 12px); }
-  /* line 34, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
   .imgInfo #arrow {
     content: '';
     display: block;
@@ -33,11 +29,13 @@ html {
     position: absolute;
     top: 0;
     left: 0;
+<<<<<<< Updated upstream
     transform: translateY(-100%); }
-  /* line 46, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
+=======
+    transform: translateY(-100%) translateX(-50%); }
+>>>>>>> Stashed changes
   .imgInfo #info {
     color: #b0b0b0; }
-    /* line 49, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .imgInfo #info .close-button {
       cursor: pointer;
       background: #222222;
@@ -47,7 +45,6 @@ html {
       position: absolute;
       top: 5px;
       right: 5px; }
-      /* line 56, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .imgInfo #info .close-button:before, .imgInfo #info .close-button:after {
         content: '';
         font-style: normal;
@@ -62,49 +59,38 @@ html {
         top: 0;
         bottom: 0;
         margin: auto; }
-      /* line 67, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .imgInfo #info .close-button:before {
         transform: rotate(45deg); }
-      /* line 70, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .imgInfo #info .close-button:after {
         transform: rotate(-45deg); }
-    /* line 75, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .imgInfo #info #titlewrap {
       display: inline; }
-      /* line 78, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .imgInfo #info #titlewrap #title {
         font-weight: 400;
         display: inline;
         font-size: 24px;
         color: #d6d6d6; }
-      /* line 82, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .imgInfo #info #titlewrap #userwrap {
         display: inline;
         margin-left: 5px;
         color: #7d7d7d; }
-        /* line 87, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .imgInfo #info #titlewrap #userwrap #user {
           text-decoration: none;
           transition: .2s;
           color: #7d7d7d; }
-          /* line 92, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .imgInfo #info #titlewrap #userwrap #user:hover {
             color: #d6d6d6; }
-    /* line 99, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .imgInfo #info #desc {
       margin: 10px 0;
       line-height: 25px;
       font-size: 18px;
       overflow: hidden;
       padding-bottom: 40px; }
-      /* line 106, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .imgInfo #info #desc a {
         color: inherit;
         transition: .2s; }
-        /* line 110, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .imgInfo #info #desc a:hover {
           color: #d6d6d6; }
-    /* line 116, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .imgInfo #info #see-more {
       position: absolute;
       right: 15px;
@@ -118,11 +104,9 @@ html {
       font-size: 18px;
       line-height: 18px;
       border-radius: 3px;
-      transition: all 0.2s linear; }
-      /* line 130, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
+      transition: all .2s linear; }
       .imgInfo #info #see-more:hover {
         box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.5); }
-  /* line 139, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
   .imgInfo #loader #spinner {
     height: 20px;
     width: 20px;
@@ -133,27 +117,22 @@ html {
     bottom: 0;
     right: 0;
     margin: auto;
-    box-shadow: 50px 0 0 rgba(195, 195, 195, 0.8), 35px 35px 0 rgba(163, 163, 163, 0.8), 0 50px 0 rgba(131, 131, 131, 0.8), -35px 35px 0 rgba(99, 99, 99, 0.8), -50px 0 0 rgba(68, 68, 68, 0.8), -35px -35px 0 rgba(36, 36, 36, 0.8), 0 -50px 0 rgba(4, 4, 4, 0.8), 35px -35px 0 rgba(227, 227, 227, 0.8);
+    box-shadow: 50px 0 0 rgba(195, 195, 195, 0.8), 35.0px 35.0px 0 rgba(163, 163, 163, 0.8), 0 50px 0 rgba(131, 131, 131, 0.8), -35.0px 35.0px 0 rgba(100, 100, 100, 0.8), -50px 0 0 rgba(68, 68, 68, 0.8), -35.0px -35.0px 0 rgba(36, 36, 36, 0.8), 0 -50px 0 rgba(4, 4, 4, 0.8), 35.0px -35.0px 0 rgba(227, 227, 227, 0.8);
     -webkit-animation: spin 2s infinite ease; }
 
 @media screen and (max-width: 1024px) {
-  /* line 158, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
   .imgInfo {
     margin-left: 6px;
     margin-right: 6px; } }
-
-/* line 161, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
 .wrapper {
   text-align: center;
   width: 100%; }
-  /* line 165, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
   .wrapper#header {
     background: -webkit-linear-gradient(left, #28546C, #587D91);
     line-height: 16.66%;
     text-align: center;
     width: 100%;
     height: 100px; }
-    /* line 172, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .wrapper#header header {
       width: 100%;
       max-width: 1024px;
@@ -161,16 +140,13 @@ html {
       position: relative;
       display: block;
       height: 100%; }
-      /* line 179, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#header header img {
         cursor: pointer; }
-        /* line 181, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header img#logo {
           position: absolute;
           left: 4%;
           top: 50%;
           transform: translateY(-50%); }
-        /* line 186, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header img#upload, .wrapper#header header img#hamburger {
           position: absolute;
           right: 4%;
@@ -178,19 +154,15 @@ html {
           transform: translateY(-50%);
           width: 23px;
           height: 23px; }
-        /* line 192, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header img#filter {
           position: absolute;
           right: 10%;
           top: 50%;
           transform: translateY(-50%); }
-          /* line 197, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .wrapper#header header img#filter:focus {
             outline: none; }
-          /* line 200, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .wrapper#header header img#filter:focus ~ #filtermenu {
             display: block; }
-      /* line 206, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#header header #filtermenu, .wrapper#header header #settingsmenu {
         display: none;
         position: absolute;
@@ -202,7 +174,6 @@ html {
         padding: 1%;
         right: 2%;
         text-align: left; }
-        /* line 217, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header #filtermenu:before, .wrapper#header header #settingsmenu:before {
           content: '';
           border-bottom: 12px solid #FCFEFF;
@@ -210,25 +181,20 @@ html {
           border-right: 15px solid transparent;
           position: absolute;
           top: -12px; }
-        /* line 226, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header #filtermenu h2, .wrapper#header header #settingsmenu h2 {
           margin: 12px;
           margin-top: 21px;
           font-weight: 400;
           vertical-align: middle; }
-      /* line 234, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#header header #filtermenu {
         height: 225px;
         width: 275px; }
-        /* line 238, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header #filtermenu:before {
           right: 78px; }
-        /* line 242, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header #filtermenu .colours {
           display: flex;
           flex-wrap: wrap;
           justify-content: center; }
-          /* line 246, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .wrapper#header header #filtermenu .colours .colour {
             cursor: pointer;
             position: relative;
@@ -238,25 +204,18 @@ html {
             height: 60px;
             margin: 10px;
             border-radius: 50%; }
-            /* line 255, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour#red {
               background: #FF505F; }
-            /* line 256, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour#blue {
               background: #4B8AFF; }
-            /* line 257, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour#green {
               background: #16C430; }
-            /* line 258, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour#yellow {
               background: #FCDB3E; }
-            /* line 259, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour#white {
               background: #FCFEFF; }
-            /* line 260, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour#black {
               background: #383838; }
-            /* line 262, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour:after {
               transition: .2s;
               content: '';
@@ -273,9 +232,8 @@ html {
               bottom: 0;
               margin: auto;
               z-index: 10002; }
-            /* line 277, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour:before {
-              transition: all 0.2s ease-in-out;
+              transition: all .2s ease-in-out;
               content: url(https://upload.wikimedia.org/wikipedia/commons/9/90/Check_mark_23x20_02.svg);
               display: none;
               height: 20px;
@@ -289,52 +247,41 @@ html {
               bottom: 0;
               margin: auto;
               z-index: 10003; }
-            /* line 291, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour:hover:after {
               background: rgba(239, 250, 255, 0.6);
               height: 50px;
               width: 50px; }
-            /* line 296, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #filtermenu .colours .colour:hover:before {
               display: block; }
-      /* line 303, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#header header #settingsmenu {
         height: 225px;
         width: 275px; }
-        /* line 307, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header #settingsmenu:before {
           right: 16px; }
-        /* line 310, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#header header #settingsmenu ul {
           list-style-type: none;
           margin: 21px 12px;
           line-height: normal; }
-          /* line 315, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .wrapper#header header #settingsmenu ul li {
             margin: 10px 0;
             height: 22px; }
-            /* line 320, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
             .wrapper#header header #settingsmenu ul li a {
               text-decoration: none;
               color: #28546C;
               font-weight: 400;
               display: flex;
               align-items: center; }
-              /* line 327, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
               .wrapper#header header #settingsmenu ul li a:hover {
                 color: black; }
-              /* line 331, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
               .wrapper#header header #settingsmenu ul li a img {
                 height: 20px;
                 width: 30px;
                 margin: 0;
                 margin-right: 5px; }
-  /* line 344, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
   .wrapper#content {
     position: relative;
     max-width: 1024px;
     margin: auto; }
-    /* line 351, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .wrapper#content #loadercntnr {
       position: fixed;
       left: 0;
@@ -344,7 +291,6 @@ html {
       height: 87vh;
       display: block;
       background: rgba(255, 255, 255, 0.8); }
-      /* line 358, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#content #loadercntnr #loader {
         height: 30px;
         width: 30px;
@@ -357,20 +303,16 @@ html {
         margin: auto;
         box-shadow: 75px 0 0 rgba(130, 206, 229, 0.8), 52.5px 52.5px 0 rgba(77, 186, 218, 0.8), 0 75px 0 rgba(40, 157, 192, 0.8), -52.5px 52.5px 0 rgba(29, 114, 139, 0.8), -75px 0 0 rgba(18, 71, 86, 0.8), -52.5px -52.5px 0 rgba(7, 27, 34, 0.8), 0 -75px 0 rgba(0, 0, 0, 0.8), 52.5px -52.5px 0 rgba(183, 227, 240, 0.8);
         -webkit-animation: spin 2s infinite ease; }
-    /* line 376, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .wrapper#content #popular {
       width: 100%;
       max-width: 1024px;
       margin: auto;
       display: flex;
       flex-wrap: wrap; }
-      /* line 386, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#content #popular a:hover:after {
         content: attr("data-title"); }
-  /* line 393, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
   .wrapper#upload-content {
     text-align: center; }
-    /* line 395, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
     .wrapper#upload-content #uploadbutton {
       position: relative;
       margin: auto;
@@ -379,7 +321,6 @@ html {
       background-position: 50% 25%;
       width: 100%;
       height: 629px; }
-      /* line 404, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#upload-content #uploadbutton #img {
         opacity: 0;
         width: 100%;
@@ -390,17 +331,14 @@ html {
         top: 0;
         z-index: 5;
         cursor: pointer; }
-        /* line 413, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#upload-content #uploadbutton #img:focus {
           outline: none; }
-      /* line 418, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#upload-content #uploadbutton h1 {
         position: absolute;
         left: 0;
         right: 0;
         top: 50%;
         z-index: 4; }
-      /* line 424, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
       .wrapper#upload-content #uploadbutton #filetransfer {
         position: absolute;
         left: 0;
@@ -410,19 +348,16 @@ html {
         width: 40vw;
         margin: auto;
         text-align: center; }
-        /* line 432, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
         .wrapper#upload-content #uploadbutton #filetransfer #progressbar {
           margin: auto;
           width: 100%;
           height: 3vh;
           background: #6E90A2; }
-          /* line 437, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .wrapper#upload-content #uploadbutton #filetransfer #progressbar #done {
             height: 100%;
             width: 0%;
             background: #28546C;
             z-index: 3; }
-          /* line 443, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .wrapper#upload-content #uploadbutton #filetransfer #progressbar:before {
             content: attr(data-task);
             color: #FCFEFF;
@@ -432,7 +367,6 @@ html {
             left: 1%;
             bottom: 0;
             z-index: 4; }
-          /* line 451, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/style.scss */
           .wrapper#upload-content #uploadbutton #filetransfer #progressbar:after {
             content: attr(data-percent);
             color: #FCFEFF;
