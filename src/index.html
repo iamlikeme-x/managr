@@ -68,8 +68,8 @@
                 <div id="info">
                     <i id="arrow"></i>
                     <i class="close-button"></i>
-                    <span id="titlewrap"><h2 id="title">Waiting</h2> <p id="userwrap">by <a href="#" id="user">User</a></p></span>
-                    <p id="desc">Had a short spell of light at Shingle Street on Sunday, just enough to light up the cottages. One of the things I love about it here are the subtle changes to the compositions you can get <a href="#">with</a> the shifting shingle banks. I left the blue cast from the little stopper on as its sums up the mood there pretty well.</p>
+                    <span id="titlewrap"><h2 id="title"></h2> <p id="userwrap">by <a href="user.html?nsid=" id="user"></a></p></span>
+                    <p id="desc"></p>
                     <a href="#" id="see-more">View Image</a>
                 </div>
                 <div id="loader"><div id="spinner"></div></div>
@@ -214,6 +214,7 @@
             } else {
                 $('.imgInfo #user').html(data.photo.owner.username);
             }
+            $('.imgInfo #user').attr('href','user.html?nsid='+data.photo.owner.nsid);
             $('.imgInfo #loader').fadeOut(400);
             $('.imgInfo #info').fadeIn(200);
         }
