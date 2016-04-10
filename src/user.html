@@ -69,28 +69,25 @@
                 params = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
                 
                 var data = {
-                    method: 'flickr.people.getInfo',
-                    api_key: 'f558724ba49174dc32d3828d1a7302cd',
-                    format: 'json',
-                    user_id: params.nsid,
-                    jsoncallback: 'loadUserInfo'
+                    url: 'https://api.flickr.com/services/rest/',
+                    method: 'GET',
+                    data: {
+                        api_key: 'f558724ba49174dc32d3828d1a7302cd',
+                        user_id: params.nsid,
+                        method: 'flickr.people.getInfo',
+                        jsoncallback: 'loadUserInfo',
+                        format: 'json',
+                    }                    
                 };
                 
-                var signature = signCallData('flickr.people.getInfo', data).oauth_signature;
-                
-                console.log(signature);
-                
-                data.api_sig = signature;
-                
+                var data = signUrl(data, true);
                 $.ajax({
                     method: 'GET',
                     url: 'https://api.flickr.com/services/rest/',
                     data: data,
                     dataType: 'jsonp'
                 });
-                
             });
-            
             function loadUserInfo(info){
                 console.log(info);
                 var username = info.person.username._content;
@@ -103,25 +100,36 @@
                 var iconFarm = info.person.iconfarm;
                 var iconServer = info.person.iconserver;
                 var nsid = info.person.nsid;
-                var profilePicUrl = 'http://farm'+iconFarm+'.staticflickr.com/'+iconServer+'/buddyicons/'+nsid+'.jpg';
+                var profilePicUrl = 'http://farm'+iconFarm+'.staticflickr.com/'+iconServer+'/buddyicons/'+nsid+'_r.jpg';
                 if(parseInt(iconFarm) != 0){
                     $('#profile-pic').attr('src', profilePicUrl);
                 }
-                
-                var fullName = info.person.realname._content;
-                $('#name').text(fullName);
+                if(info.person.realname){
+                    var fullName = info.person.realname._content;
+                } else {
+                    var fullName = false;
+                }
+                if(fullName){
+                    $('#name').text(fullName);
+                }
                 
                 var bio = info.person.description._content;
                 if(bio){
-                    $('#bio').text(bio);
+                    bio = $(bio)
+                    bio.find('a img').each(function() {
+                        console.log('unbinding '+this);
+                        $(this).off('click');
+                    });
+                    console.log(bio);
+                    $('#bio').html(bio);
                 }else{
                     $('#bio').text('User has no description!');
                 }
-                
-                var location = info.person.location._content;
-                if(location){
+                if(info.person.location){
+                    var location = info.person.location._content;
                     $('#location').text(location);
                 }else{
+                    var location = false;
                     $('#location').text('Location not set');
                 }
             }
