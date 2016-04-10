@@ -116,7 +116,7 @@
                 var bio = info.person.description._content;
                 if(bio){
                     bio = $(bio)
-                    bio.find('a img').each(function() {
+                    $('*', bio).each(function() {   // this doesn't work: should strip all events.
                         console.log('unbinding '+this);
                         $(this).off('click');
                     });
