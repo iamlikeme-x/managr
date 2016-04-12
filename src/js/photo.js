@@ -67,24 +67,20 @@ function formatPhotos(data) {
 
 function loadImgs(arr) {
     $('#popular').fadeOut(200);
-    var arrLength = Object.size(arr);
     counter = 1;
     $.each(arr, function (key, val) {
         $('#popular').append($('<a id="img-container' + counter + '" href="#" data-id="'+val[1]+'" data-secret="'+val[2]+'" data-title="' + key.replace(/"/g, '&quot;') + '"><img src="' + val[0] + '" id="img' + counter + '" class="colorTaggedImage"></a>'));
         counter++;
-        if(counter == 50){
+        if(counter == Object.keys(arr).length){
             $("#popular").justifiedGallery({
                 'rowHeight': 200,
                 'lastRow': 'justify',
                 'margins': 6
             });
-            if(!$('#loadercntnr').is(':hidden')){
-                $('#loadercntnr').fadeOut(200);
-            }
+            $('#loadercntnr').fadeOut(200);
             $('#popular').fadeIn(200);
             
         }
-        
     });
 
     sessionStorage.setItem('cachedContent', $('#content').html());
@@ -97,7 +93,6 @@ function filter(colors){
     var classified = sessionStorage.getItem('classified') == 'true';
     if(cachedContent){
         if(!classified){
-            console.log("asd");
             cachedContent = classify(cachedContent);
         }
         $(cachedContent).find('img').each(function(){

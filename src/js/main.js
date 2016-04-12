@@ -1,14 +1,4 @@
 // Version 2.0
-Object.size = function (obj) {
-    var size = 1,
-        key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
-sessionStorage.setItem('filterColors', '[]');
-
 ///////////////////////////////////////
 //START Node Webkit Stuff            //
 ///////////////////////////////////////
