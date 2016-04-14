@@ -98,8 +98,18 @@
             //Load photos
             loadRecentPhotos();
             
+            $('#see-more').click(function(){
+                imgData = $('.imgInfo').data();
+                console.log(imgData);
+                window.location = './photo.html?imgId='+$.param(imgData);
+
+            });
+            
             $(document).click(function(e){
-                e.preventDefault();
+                if(e.target.id != "user"){
+                    e.preventDefault();
+                }
+                
                 var ids = ['filtermenu', 'settingsmenu', 'filter', 'hamburger'];
                 if(!$(e.target).closest(".imgInfo").length) { //Has the user clicked on .imgInfo?
                     if(!$('.imgInfo').is(':hidden') && e.target.id.indexOf("img") == -1){
@@ -132,6 +142,7 @@
                         $('#arrow').css({
                             left: img.position().left + img.width()/2
                         });
+                        $('html, body').animate({scrollTop:$(img).offset().top},200);
                         $('.imgInfo').fadeIn(200);
 
                         $.ajax({
@@ -199,15 +210,12 @@
                     }
                 }, 1000);
             });
-            
-            //Show Image Info on Click
-             $(document).click(function(e){
-                
-            });
         });
         
         function loadPhotoData(data) {
+            console.log("asd", data);
             $('.imgInfo #title').html(data.photo.title._content);
+            $('.imgInfo').data(data.photo);
             $('.imgInfo #desc').html(stripScripts(data.photo.description._content.replace(/\n/g, "<br>")));
             if(data.photo.owner.realname){
                 $('.imgInfo #user').html(data.photo.owner.realname);

@@ -11,6 +11,7 @@
         <script src="./js/jquery-2.2.0.min.js"></script><!-- jQuery -->
         <script src="./js/main.js"></script>
         <script src="./js/config.js"></script>
+        <script src="./js/deparam.js"></script>
         <!-- OAuth.js & Dependencies-->
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
@@ -65,76 +66,13 @@
         
         <script>
             $(function(){
-                var cfg = getConfig();
-                var params = window.location.search.substring(1);
-                params = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+                var search = location.search.substring(1);
+                var imgData = search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',
+                 function(key, value) { return key===""?value:decodeURIComponent(value) }):{};
+                console.log(imgData);
                 
-                var data = {
-                    url: 'https://api.flickr.com/services/rest/',
-                    method: 'GET',
-                    data: {
-                        api_key: 'f558724ba49174dc32d3828d1a7302cd',
-                        user_id: params.nsid,
-                        method: 'flickr.people.getInfo',
-                        jsoncallback: 'loadUserInfo',
-                        format: 'json',
-                    }                    
-                };
-                if(cfg.loggedIn){
-                    var data = signUrl(data, true);
-                }
-                $.ajax({
-                    method: 'GET',
-                    url: 'https://api.flickr.com/services/rest/',
-                    data: data,
-                    dataType: 'jsonp'
-                });
+                
             });
-            function loadUserInfo(info){
-                console.log(info);
-                var username = info.person.username._content;
-                if(username.substr(username.length - 1) == 's'){
-                    $('title').text(username+'\' profile');
-                }else{
-                    $('title').text(username+'\'s profile');
-                }
-                
-                var iconFarm = info.person.iconfarm;
-                var iconServer = info.person.iconserver;
-                var nsid = info.person.nsid;
-                var profilePicUrl = 'http://farm'+iconFarm+'.staticflickr.com/'+iconServer+'/buddyicons/'+nsid+'_r.jpg';
-                if(parseInt(iconFarm) != 0){
-                    $('#profile-pic').attr('src', profilePicUrl);
-                }
-                if(info.person.realname){
-                    var fullName = info.person.realname._content;
-                } else {
-                    var fullName = false;
-                }
-                if(fullName){
-                    $('#name').text(fullName);
-                }
-                
-                var bio = info.person.description._content;
-                if(bio){
-                    bio = $(bio)
-                    $('*', bio).each(function() {   // this doesn't work: should strip all events.
-                        console.log('unbinding '+this);
-                        $(this).off('click');
-                    });
-                    console.log(bio);
-                    $('#bio').html(bio);
-                }else{
-                    $('#bio').text('User has no description!');
-                }
-                if(info.person.location){
-                    var location = info.person.location._content;
-                    $('#location').text(location);
-                }else{
-                    var location = false;
-                    $('#location').text('Location not set');
-                }
-            }
         </script>
     </body>
 </html>
