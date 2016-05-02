@@ -113,7 +113,7 @@ html {
     bottom: 0;
     right: 0;
     margin: auto;
-    box-shadow: 50px 0 0 rgba(195, 195, 195, 0.8), 35.0px 35.0px 0 rgba(163, 163, 163, 0.8), 0 50px 0 rgba(131, 131, 131, 0.8), -35.0px 35.0px 0 rgba(100, 100, 100, 0.8), -50px 0 0 rgba(68, 68, 68, 0.8), -35.0px -35.0px 0 rgba(36, 36, 36, 0.8), 0 -50px 0 rgba(4, 4, 4, 0.8), 35.0px -35.0px 0 rgba(227, 227, 227, 0.8);
+    box-shadow: 50px 0 0 rgba(195, 195, 195, 0.8), 35px 35px 0 rgba(163, 163, 163, 0.8), 0 50px 0 rgba(131, 131, 131, 0.8), -35px 35px 0 rgba(100, 100, 100, 0.8), -50px 0 0 rgba(68, 68, 68, 0.8), -35px -35px 0 rgba(36, 36, 36, 0.8), 0 -50px 0 rgba(4, 4, 4, 0.8), 35px -35px 0 rgba(227, 227, 227, 0.8);
     -webkit-animation: spin 2s infinite ease; }
 
 @media screen and (max-width: 1024px) {

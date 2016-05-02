@@ -1,0 +1,35 @@
+/* line 12, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/user-style.scss */
+#content {
+  background-color: #383838;
+  color: #b0b0b0;
+  min-height: 200px;
+  position: relative;
+  margin: auto; }
+
+/* line 20, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/user-style.scss */
+#bio {
+  height: 60px;
+  overflow: hidden; }
+
+/* line 24, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/user-style.scss */
+#profile-pic {
+  position: inline-block;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px; }
+
+/* line 30, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/user-style.scss */
+.profile {
+  position: relative;
+  background-color: #FCFEFF;
+  width: 100%;
+  height: 100%;
+  margin: 12px; }
+
+/* line 37, C:/Users/Oliver Scase/Documents/GitHub/managr/src/scss/user-style.scss */
+.bio {
+  position: inline-block;
+  background-color: #383838;
+  margin: 6px; }
+
+/*# sourceMappingURL=user-style.css.map */

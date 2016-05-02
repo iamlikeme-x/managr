@@ -7,6 +7,7 @@
         <title>User Profile</title>
 
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/user-style.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <script src="./js/jquery-2.2.0.min.js"></script><!-- jQuery -->
         <script src="./js/main.js"></script>
@@ -43,9 +44,16 @@
         </div>
         
         <div class="wrapper" id="content">
-            <img src="https://www.flickr.com/images/buddyicon.gif" alt="" id="profile-pic">
-            <h2 id="name"></h2>
-            <p id="bio"></p>
+            <div class="profile-pic">
+                <img src="https://www.flickr.com/images/buddyicon.gif" alt="" id="profile-pic">
+            </div>
+            <div class="profileName">
+                <h2 id="name"></h2>
+            </div>
+            <div class="bio">
+                <p id="bio"></p>
+            </div>
+            <div id="biobutton"><a href="#">Click Here</a></div>
             <p id="location"></p>
         </div>
    
@@ -89,11 +97,35 @@
                 });
                 $('#settingsbutton').click(function(e){
                     e.preventDefault();
-                    $('#settingsmenu').fadeIn(200);
+                    $('#settingsmenu').fadeToggle(200);
+                });
+                // setup variables
+                var bioHeight = 60;
+                
+                function showMore(){
+                    autoHeightAnimate($('#bio'), 500);
+                    $(this).children('a').html("Show Less");
+                    $(this).one('click',showLess);
+                }
+                function showLess(){
+                    $('#bio').animate({height: bioHeight}, 500);
+                    $(this).children('a').html("Show More");
+                    $(this).one('click',showMore);
+                }
+                
+                $('#biobutton').one('click',showMore);
+                $('#bio').change(function(){
+                    $('#bio').css('height', 'auto');
+                    var bioAutoHeight = $('#bio').height();
+                    console.log(bioAutoHeight);
+                    if(bioAutoHeight <= bioHeight){
+                        $('#biobutton').hide();
+                    } else {
+                        $('#bio').height(bioHeight);
+                    }
                 });
             });
             function loadUserInfo(info){
-                console.log(info);
                 var username = info.person.username._content;
                 if(username.substr(username.length - 1) == 's'){
                     $('title').text(username+'\' profile');
@@ -120,11 +152,11 @@
                 var bio = info.person.description._content.replace(/\n/g, "<br>") + '</div>';
                 if(bio){
                     bio = descript(bio);
-                    console.log(bio);
                     $('#bio').html(bio);
                 }else{
-                    $('#bio').text('User has no description!');
+                    $('#bio').html('User has no description!');
                 }
+                $('#bio').trigger('change');
                 if(info.person.location){
                     var location = info.person.location._content;
                     $('#location').text(location);
